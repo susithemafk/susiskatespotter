@@ -1,0 +1,80 @@
+@import '../variables.scss'; 
+
+
+.dropdown {
+
+    .clickOutside {
+        position: fixed; 
+        height: 100vh; 
+        width: 100vw; 
+        top: 0;
+        left: 0;
+        // z-index: 1000;
+    }
+
+
+    .container {
+        min-width: 300px; 
+        position: relative; 
+        width: 100%; 
+        
+        .checkbox {
+            height: 24px; 
+            width: 24px;  
+
+            svg {
+                height: 100%; 
+                width: 100%;
+            }
+        }
+
+        .selectButton {
+            border-radius: 999px; 
+            border: 1px solid black; 
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+            background-color: white;
+            min-height: 50px;
+            cursor: pointer; 
+
+            .icon {
+                height: 24px; 
+                width: 24px;  
+
+                svg {
+                    height: 100%; 
+                    width: 100%;
+                }
+            }
+        } 
+
+        .options {
+            position: absolute;
+            border-radius: 10px; 
+            border: 1px solid black; 
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+            width: 100%; 
+            z-index: 1000; 
+            background-color: white; 
+
+            .option:nth-child(1) {
+                border-radius: 10px 10px 0 0;
+            }
+            .option:last-child {
+                border-radius: 0 0 10px 10px;
+            }
+
+            .option {
+                cursor: pointer;
+                transition: background-color 0.3s; 
+
+                &:hover {
+                    background-color: #f5f5f5;
+                }
+            }
+        } 
+
+        @media (max-width: $md) {
+            min-width: 200px;
+        }
+    }
+}

@@ -1,0 +1,58 @@
+@import "../variables.scss";
+
+.carousel {
+
+    height: 100%; 
+    width: 100%;
+    position: relative; 
+
+    .slide {
+        width: 100%; 
+        height: 100%;
+        background-position: center; 
+        background-size: cover; 
+        transition: background-image 0.5s ease-in-out;
+    }
+
+    .leftArrow, .rightArrow {
+        position: absolute; 
+        top: 50%; 
+        cursor: pointer; 
+        z-index: 1; 
+
+        svg {
+            height: 50px; 
+            width: 50px;
+        }
+    }
+
+    .leftArrow {
+        left: 0px; 
+        transform: rotate(90deg) translate(-50%, 0);
+    }
+    .rightArrow {
+        right: 0px; 
+        transform: rotate(-90deg) translate(50%, 0);
+    } 
+
+    .dotsWrapper {
+        display: flex; 
+        justify-content: center; 
+        width: 100%; 
+        padding: 10px 0; 
+        position: absolute; 
+        bottom: 0px;
+
+        .dot {
+            margin: 0 3px; 
+            cursor: pointer; 
+            font-size: 10px; 
+            color: rgb(233, 233, 233); 
+
+            &.active {
+                color: $yellow; 
+            }
+        }
+    }
+
+}

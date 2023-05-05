@@ -1,0 +1,37 @@
+
+
+//zmenit barvu hvezdicek v diskuzi 
+pridat moznost vlozeni url na ytb video do diskuze 
+//pridat proklik z find-skateparks na singleskatepark 
+pridat mazani komentaru a spotu pokud jsi admin 
+pridat editaci skatespotu pokud jsi jeho creator 
+//mapa: 
+// bude nastavitelna na spoty takze find-skate$=spots bude hledat pouze spoty
+//                                   find-skate$=skateparks        pouze skateparky 
+
+// budes moct nastavit řazení, defaultně bude od nejbližšího, 
+//                             přidat: 
+//                                 od nejoblíbenějších     rating
+//                                 od nejnovějších         date
+//                                 od nejbližších          count souřadnice tvoje a spotu 
+
+
+pridat sekci Komunita - nevim co tam bude teda:D 
+//    mohlo by byt neco jako kazdotydenni hlasovani o nejlepsi edit nebo tak
+    
+//rozdělit to celý na Seznam spotů list-skate$=spots, skateparks 
+//               a na Mapa spotů 
+
+//pridat loading na buttony - log in sign up 
+
+
+
+//Pridat FLAT ! 
+//Single = pridat ZOBRAZIT NA MAPE
+//komentare max 260 znaku
+
+cim sortnout spoty na find skatepark?
+
+weekly pocitat opravdu podle tydne 
+
+//zprovoznit kontaktni formular 

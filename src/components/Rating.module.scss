@@ -1,0 +1,55 @@
+.starsWrapper {
+    position: relative; 
+
+    .starsEmpty {
+        position: absolute; 
+        top: 0; 
+        left: 0; 
+        z-index: 1;  
+        width: -webkit-fill-available;
+    } 
+
+    .starsFull {
+        position: absolute; 
+        top: 0; 
+        left: 0; 
+        z-index: 2; 
+        white-space: nowrap;
+        overflow: hidden; 
+        // width: -webkit-fill-available;
+        // height: 36px; 
+    } 
+
+    .rating {
+        position: absolute;
+        right: -30px;
+        bottom: 5px;
+    }
+
+
+
+    .starsWrapper {
+
+        .starratingwrapper {
+            display: inline-block;
+            // height: 35px;
+            position: relative; 
+
+            .emptystarselement {
+                // background: url('https://cdn.alza.cz/Styles/images/svg/star-unified-empty.svg') repeat-x; 
+                // background-size: 35px auto;
+                height: 100%;
+                // width: 175px;
+            }
+
+            .starselement {
+                // background: url('https://cdn.alza.cz/Styles/images/svg/star-full.svg') repeat-x;
+                // background-size: 35px auto;
+                height: 100%;
+                left: 0;
+                position: absolute;
+                top: 0;
+            }
+        }
+    }
+}

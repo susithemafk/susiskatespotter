@@ -1,0 +1,26 @@
+
+@import '../variables.scss';
+
+.account {
+    .container {
+        background-color: $yellow;
+
+    }
+
+    .comment {
+
+        @media (max-width: $lg) {
+            border-bottom: 1px solid black; 
+        }
+
+        .right {
+            border-left: 1px solid black;  
+
+            @media (max-width: $lg) {
+                border-left: unset;
+            }
+        }
+    } 
+
+
+}

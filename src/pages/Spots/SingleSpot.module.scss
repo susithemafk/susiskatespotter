@@ -1,0 +1,36 @@
+@import '../../variables.scss'; 
+
+.singleSkatepark {
+
+    .carousel {
+        height: 500px; 
+
+        @media (max-width: $lg) {
+            height: 300px;
+        }
+    }
+
+    .details {
+        display: flex; 
+        flex-direction: column; 
+        justify-content: space-between;
+        height: 100%;
+    }
+
+
+    .comment {
+
+        @media (max-width: $lg) {
+            border-bottom: 1px solid black; 
+        }
+
+        .right {
+            border-left: 1px solid black;  
+
+            @media (max-width: $lg) {
+                border-left: unset;
+            }
+        }
+    } 
+    
+}

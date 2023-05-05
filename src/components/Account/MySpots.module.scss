@@ -1,0 +1,79 @@
+@import '../../variables.scss'; 
+
+.mySpots {
+
+
+    
+    .place {
+        position: relative; 
+        
+        .background {
+            box-shadow: 10px 10px 0 $red;
+            position: relative; 
+            height: 200px; 
+            overflow: hidden; 
+
+            @media (max-width: $md) {
+                height: 145px; 
+            }
+
+            img {
+                position: absolute;
+                height: 100%; 
+                min-width: 100%; 
+                width: 100%;
+                object-fit: cover; 
+                object-position: 100% 50%; 
+            }
+            .overlay {
+                position: absolute; 
+                inset: 0; 
+                background-color: rgba(0, 0, 0, 0.5); 
+                height: 100%; 
+                width: 100%; 
+                transition: background-color 0.3s; 
+            } 
+
+           
+        } 
+
+        .content {
+            position: absolute; 
+            bottom: 0; 
+            left: 0; 
+            right: 0; 
+
+            h3 {
+                color: white; 
+            }
+        } 
+
+        &::after {
+            content: 'DETAIL'; 
+            position: absolute; 
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%); 
+            color: white; 
+            font-size: 1.5rem; 
+            font-weight: 700; 
+            opacity: 0; 
+            transition: opacity 0.3s; 
+            pointer-events: none;
+        }
+
+        &:hover { 
+
+            .overlay {
+                background-color: rgba(0, 0, 0, 0.8);
+            }
+
+            &::after {
+                opacity: 1; 
+            }
+            
+        }
+
+        
+    }
+}

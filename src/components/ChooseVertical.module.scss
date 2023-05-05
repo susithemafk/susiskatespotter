@@ -1,0 +1,17 @@
+
+
+.chooseVertical {
+
+    .box {
+        border-radius: 5px; 
+        border: 2px solid; 
+        transition: background-color 0.3s; 
+        
+        & > * {color: white;} 
+
+        &.active {
+
+            & > * {color: white;}
+        }
+    }
+}

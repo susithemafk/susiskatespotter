@@ -1,0 +1,638 @@
+// Montserrat and Prosto One 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Prosto+One&display=swap');
+
+// Open Sans 
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+
+// Roboto 
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+// Orbitron 
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap');
+
+
+@import './variables.scss'; 
+
+* {
+    box-sizing: border-box !important;; 
+    margin: 0; 
+    padding: 0; 
+    color: $darkgray; 
+    list-style: none;
+} 
+
+body {
+  margin: 0;
+  font-family: Montserrat, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+} 
+
+input {
+    font-family: Montserrat, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+}
+
+button {
+    all: unset; 
+    cursor: pointer; 
+} 
+
+hr {
+    border: 1px solid #D2D2D2;  
+} 
+
+.walker {
+    font-family: 'Walker bot ldr', sans-serif; 
+    // font-family: 'Orbitron', sans-serif; 
+    // line-height: 50px;
+} 
+
+.rotate-180 {
+    transform: rotate(180deg); 
+} 
+
+a {
+    text-decoration: none;
+} 
+
+p {
+    margin-bottom: 0.25rem; 
+    word-break: break-word;
+}
+
+
+// susi setup 
+$md: 767px;  
+$lg: 992px;  
+$sm: 576px; 
+$xl: 1200px;
+
+$breakpoints: (
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+); 
+
+$gutters: (
+    0: 0,
+    1: 0.25rem,
+    2: 0.5rem,
+    3: 1rem,
+    4: 1.5rem,
+    5: 3rem,
+); 
+// COLS
+// COLS
+// COLS
+
+$cols: (
+    1: 8.3333%,
+    2: 16.6666%,
+    3: 25%,
+    4: 33.3333%,
+    5: 41.6666%,
+    6: 50%,
+    7: 58.3333%,
+    8: 66.6666%,
+    9: 75%,
+    10: 83.3333%,
+    11: 91.6666%,
+    12: 100%,
+); 
+
+// font sizes
+.display-1 {font-size: 5rem}
+.display-2 {font-size: 4.5rem}
+.display-3 {font-size: 4rem}
+.display-4 {font-size: 3.5rem}
+.display-5 {font-size: 3rem}
+.display-6 {font-size: 2.5rem}
+
+.fs-1 {font-size: 2.5rem}
+.fs-2 {font-size: 2rem}
+.fs-3 {font-size: 1.7rem}
+.fs-4 {font-size: 1.4rem}
+.fs-5 {font-size: 1.1rem}
+.fs-6 {font-size: 0.75rem} 
+
+@media (max-width: $md) {
+    .display-1 {font-size: 4rem}
+    .display-2 {font-size: 3.5rem}
+    .display-3 {font-size: 3rem}
+    .display-4 {font-size: 2.5rem}
+    .display-5 {font-size: 2rem}
+    .display-6 {font-size: 1.5rem}
+
+    .fs-1 {font-size: 2rem}
+    .fs-2 {font-size: 1.5rem}
+    .fs-3 {font-size: 1.2rem}
+    .fs-4 {font-size: 1rem}
+    .fs-5 {font-size: 0.9rem}
+    .fs-6 {font-size: 0.75rem} 
+}
+
+// containers
+.container-small {
+    max-width: 540px; 
+}
+.container-medium {
+    max-width: 840px; 
+}
+.container-large {
+    max-width: 1240px; 
+}
+.container-ml {
+    max-width: 1040px; 
+}
+.row {
+  display: flex !important; 
+} 
+.center {
+    display: flex !important; 
+    align-items: center !important; 
+    justify-content: center !important;
+}
+
+.justify-content-center {
+    justify-content: center !important; 
+}
+.justify-content-between {
+    justify-content: space-between !important; 
+}
+.justify-content-end {
+    justify-content: flex-end !important; 
+}
+.align-items-center {
+    align-items: center !important; 
+} 
+.align-items-between {
+    align-items: space-between !important; 
+}
+.flex-row {
+    flex-direction: row !important;
+} 
+.flex-column {
+    flex-direction: column !important;
+}
+.flex-wrap {
+    flex-wrap: wrap !important;
+}
+.flex-sm-wrap {
+    @media screen and (min-width: $sm) {
+        flex-wrap: wrap !important;
+    }
+}
+.flex-md-wrap {
+    @media screen and (min-width: $md) {
+        flex-wrap: wrap !important;
+    }
+}
+.flex-lg-wrap {
+    @media screen and (min-width: $lg) {
+        flex-wrap: wrap !important;
+    }
+}
+.flex-nowrap {
+    flex-wrap: nowrap !important;
+}
+.flex-sm-nowrap {
+    @media screen and (min-width: $sm) {
+        flex-wrap: nowrap !important;
+    }
+}
+.flex-md-nowrap {
+    @media screen and (min-width: $md) {
+        flex-wrap: nowrap !important;
+    }
+}
+.flex-lg-nowrap {
+    @media screen and (min-width: $lg) {
+        flex-wrap: nowrap !important;
+    }
+}
+.w-100 {
+    width: 100% !important;
+}
+.h-100 {
+    height: 100% !important;
+}
+.vw-100 {
+    width: 100vw !important;
+}
+.vh-100 {
+    height: 100vh !important;
+}
+.min-vw-100 {
+    min-width: 100vw !important;
+}
+.min-vh-100 {
+    min-height: 100vh !important;
+}
+.h-max {
+    height: max-content !important;
+}
+.h-min {
+    height: min-content !important;
+}
+.w-max {
+    width: max-content !important;
+}
+.w-min {
+    width: min-content !important;
+}
+.inset-0 {
+    inset: 0 !important; 
+}
+
+// DISPLAYDISPLAYDISPLAYDISPLAYDISPLAYDISPLAYDISPLAYDISPLAY
+$displayValues: (
+  none: none,
+  block: block,
+  flex: flex,
+  inline: inline,
+  grid: grid
+);
+
+@each $key, $value in $displayValues {
+    .d-#{$value} {
+        display: $value !important;
+    }
+}
+
+@each $keybr, $value in $breakpoints {
+    @media screen and (min-width: $value) {
+        @each $key, $value in $displayValues {
+            .d-#{$keybr}-#{$value} {
+                display: $value !important;
+            }
+        }
+    }
+}
+// DISPLAYDISPLAYDISPLAYDISPLAYDISPLAYDISPLAYDISPLAYDISPLAY
+
+// ORDERORDERORDERORDERORDERORDERORDERORDERORDERORDERORDERORDER
+
+@each $key, $value in $gutters {
+    .order-#{$key} {
+        order: $key !important;
+    }
+}
+
+@each $keybr, $value in $breakpoints {
+    @media screen and (min-width: $value) {
+        @each $key, $value in $gutters {
+            .order-#{$keybr}-#{$key} {
+                order: $key !important;
+            }
+        }
+    }
+}
+
+// ORDERORDERORDERORDERORDERORDERORDERORDERORDERORDERORDERORDER
+
+.text-center {
+    text-align: center !important;
+}
+.text-start {
+    text-align: start !important;
+} 
+.text-end {
+    text-align: end !important;
+}
+.shadow {
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5) !important;
+}
+.border {
+    border: 1px solid rgba(0, 0, 0, 0.5) !important;
+}
+.rounded {
+    border-radius: 15px !important; 
+}
+.fw-light {
+    font-weight: 300 !important;
+}
+.fw-normal {
+    font-weight: 400 !important;
+}
+.fw-bold {
+    font-weight: 700 !important;
+}
+.fw-black {
+    font-weight: 900 !important;
+} 
+.fw-100 {
+    font-weight: 100 !important;
+}
+.fw-200 {
+    font-weight: 200 !important;
+}
+.fw-300 {
+    font-weight: 300 !important;
+}
+.fw-400 {
+    font-weight: 400 !important;
+}
+.fw-500 {
+    font-weight: 500 !important;
+}
+.fw-600 {
+    font-weight: 600 !important;
+}
+.fw-700 {
+    font-weight: 700 !important;
+}
+.fw-800 {
+    font-weight: 800 !important;
+}
+.fw-900 {
+    font-weight: 900 !important;
+}
+
+.object-fit-cover {
+    object-fit: cover !important;
+}
+.overflow-hidden {
+    overflow: hidden !important; 
+}
+.bg-primary {
+    background-color: $primary !important; 
+} 
+.bg-secondary {
+    background-color: $secondary !important;
+}
+.bg-dark {
+    background-color: $darkgray !important;
+}
+.bg-light {
+    background-color: white !important;
+}
+.bg-gray {
+    background-color: lightgray !important; 
+}
+.text-primary {
+    color: $primary !important; 
+}
+.text-secondary {
+    color: $secondary !important;
+}
+.text-dark, .text-dark * {
+    color: $darkgray !important;
+}
+.text-light, .text-light * {
+    color: white !important;
+}
+.text-underline {
+    text-decoration: underline !important;
+}
+.text-not-underline {
+    text-decoration: none !important;
+}
+.position-relative {
+    position: relative !important; 
+}
+.position-absolute {
+    position: absolute !important;  
+}
+
+// cols without media queries
+@each $key, $value in $cols {
+    .col-#{$key} {
+        flex: 0 0 $value !important;
+        max-width: $value !important;
+    }
+}
+
+// cols with media queries
+@each $keybr, $value in $breakpoints {
+    @media screen and (min-width: $value) {
+        @each $key, $value in $cols {
+            .col-#{$keybr}-#{$key} {
+                flex: 0 0 $value !important;
+                max-width: $value !important;
+            }
+        }
+    }
+}
+
+// MARGINS AND PADDINGS
+// MARGINS AND PADDINGS
+// MARGINS AND PADDINGS
+
+// create margins for each breakpoint
+@each $key, $value in $gutters {
+    
+    // margin
+    .m-#{$key} {
+        margin: $value !important;
+    }
+    .mx-#{$key} {
+        margin-left: $value !important;
+        margin-right: $value !important;
+    }
+    .my-#{$key} {
+        margin-top: $value !important;
+        margin-bottom: $value !important;
+    }
+    .mt-#{$key} {
+        margin-top: $value !important;
+    }
+    .mb-#{$key} {
+        margin-bottom: $value !important;
+    }
+    .ms-#{$key} {
+        margin-left: $value !important;
+    }
+    .me-#{$key} {
+        margin-right: $value !important;
+    }
+    
+    // padding
+    .p-#{$key} {
+        padding: $value !important;
+    }
+    .px-#{$key} {
+        padding-left: $value !important;
+        padding-right: $value !important;
+    }
+    .py-#{$key} {
+        padding-top: $value !important;
+        padding-bottom: $value !important;
+    }
+    .pt-#{$key} {
+        padding-top: $value !important;
+    }
+    .pb-#{$key} {
+        padding-bottom: $value !important;
+    }
+    .ps-#{$key} {
+        padding-left: $value !important;
+    }
+    .pe-#{$key} {
+        padding-right: $value !important;
+    }
+}
+
+.m-auto {
+    margin: auto !important;
+}
+.mx-auto {
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+.my-auto {
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+}
+.ms-auto {
+    margin-left: auto !important;
+}
+.me-auto {
+    margin-right: auto !important;
+}
+.mt-auto {
+    margin-top: auto !important;
+}
+.mb-auto {
+    margin-bottom: auto !important;
+}
+
+.p-auto {
+    padding: auto !important;
+}
+.px-auto {
+    padding-left: auto !important;
+    padding-right: auto !important;
+}
+.py-auto {
+    padding-top: auto !important;
+    padding-bottom: auto !important;
+}
+.ps-auto {
+    padding-left: auto !important;
+}
+.pe-auto {
+    padding-right: auto !important;
+}
+.pt-auto {
+    padding-top: auto !important;
+}
+.pb-auto {
+    padding-bottom: auto !important;
+}
+
+// create media queries for each breakpoint
+@each $keybr, $value in $breakpoints {
+    @media screen and (min-width: $value) {
+        @each $key, $value in $gutters {
+            
+            // margin
+            .m-#{$keybr}-#{$key} {
+                margin: $value !important;
+            }
+            .mx-#{$keybr}-#{$key} {
+                margin-left: $value !important;
+                margin-right: $value !important;
+            }
+            .my-#{$keybr}-#{$key} {
+                margin-top: $value !important;
+                margin-bottom: $value !important;
+            }
+            .mt-#{$keybr}-#{$key} {
+                margin-top: $value !important;
+            }
+            .mb-#{$keybr}-#{$key} {
+                margin-bottom: $value !important;
+            }
+            .ms-#{$keybr}-#{$key} {
+                margin-left: $value !important;
+            }
+            .me-#{$keybr}-#{$key} {
+                margin-right: $value !important;
+            }
+            
+            // padding
+            .p-#{$keybr}-#{$key} {
+                padding: $value !important;
+            }
+            .px-#{$keybr}-#{$key} {
+                padding-left: $value !important;
+                padding-right: $value !important;
+            }
+            .py-#{$keybr}-#{$key} {
+                padding-top: $value !important;
+                padding-bottom: $value !important;
+            }
+            .pt-#{$keybr}-#{$key} {
+                padding-top: $value !important;
+            }
+            .pb-#{$keybr}-#{$key} {
+                padding-bottom: $value !important;
+            }
+            .ps-#{$keybr}-#{$key} {
+                padding-left: $value !important;
+            }
+            .pe-#{$keybr}-#{$key} {
+                padding-right: $value !important;
+            }
+        }
+        .m-#{$keybr}-auto {
+            margin: auto !important;
+        }
+        .mx-#{$keybr}-auto {
+            margin-left: auto !important;
+            margin-right: auto !important;
+        }
+        .my-#{$keybr}-auto {
+            margin-top: auto !important;
+            margin-bottom: auto !important;
+        }
+        .ms-#{$keybr}-auto {
+            margin-left: auto !important;
+        }
+        .me-#{$keybr}-auto {
+            margin-right: auto !important;
+        }
+        .mt-#{$keybr}-auto {
+            margin-top: auto !important;
+        }
+        .mb-#{$keybr}-auto {
+            margin-bottom: auto !important;
+        }
+
+        .p-#{$keybr}-auto {
+            padding: auto !important;
+        }
+        .px-#{$keybr}-auto {
+            padding-left: auto !important;
+            padding-right: auto !important;
+        }
+        .py-#{$keybr}-auto {
+            padding-top: auto !important;
+            padding-bottom: auto !important;
+        }
+        .ps-#{$keybr}-auto {
+            padding-left: auto !important;
+        }
+        .pe-#{$keybr}-auto {
+            padding-right: auto !important;
+        }
+        .pt-#{$keybr}-auto {
+            padding-top: auto !important;
+        }
+        .pb-#{$keybr}-auto {
+            padding-bottom: auto !important;
+        }
+
+    }
+}
+
+@import "global.scss" 

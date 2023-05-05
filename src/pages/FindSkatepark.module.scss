@@ -1,0 +1,142 @@
+@import '../variables.scss';
+
+.findSkatepark {
+    // max-height: calc(100vh - 85px); 
+    // max-height: 90vh;
+
+    .wrapper {
+        // max-height: calc(100vh - 85px); 
+        height: 100%;
+    }
+
+    .skateparksWrapper {
+        // max-height: calc(100vh - 85px); 
+        overflow: auto; 
+        height: 100%;
+
+        @media (max-width: $lg) {
+            // max-height: calc(40vh - 42.5px);
+            height: 45%;
+        }
+    }
+
+    .mapWrapper {
+        min-height: 400px; 
+        height: 100%; 
+        width: 100%;  
+        position: relative; 
+
+        @media (max-width: $lg) {
+            // min-height: calc(60vh - 42.5px); 
+            min-height: 350px;
+            height: 55%;
+        }
+
+        .categories {
+            position: absolute; 
+            top: 0;
+            left: 0;  
+            z-index: 2; 
+        }
+    
+        .map {
+            height: 100%; 
+            width: 100%;
+        }
+    }
+
+    .skatepark {
+        min-height: 200px; 
+        min-height: 200px;
+        position: relative; 
+        overflow: hidden;  
+        display: flex; 
+        flex-direction: column; 
+        transition: all 0.5s; 
+    
+        & * {
+            color: white; 
+        } 
+    
+        .content {
+            min-height: 200px;
+            position: relative; 
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end; 
+            transition: all 0.5s; 
+    
+            h2 {
+                position: absolute; 
+    
+                display: -webkit-box;
+                -webkit-line-clamp: 1;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+    
+            .details {
+                // min-height: 200px;
+                // display: none;
+                position: absolute; 
+                bottom: -100%;
+                transition: all 0.5s; 
+    
+            }
+        }
+    
+        &.active { 
+            min-height: 300px;
+    
+            .content {
+                min-height: 300px;
+    
+                .details {
+                    bottom: 60px;
+                }
+            }
+    
+            .skateparkOverlay {
+                background-color: rgba(0,0,0,0.8);  
+            }
+        }
+        
+       
+    
+        .skateparkBackground {
+            height: 100%; 
+            width: 100%; 
+            object-fit: cover; 
+            object-position: center; 
+            position: absolute; 
+            z-index: -2;
+        } 
+    
+        .skateparkOverlay {
+            position: absolute; 
+            height: 100%; 
+            width: 100%; 
+            background-color: rgba(0,0,0,0.5); 
+            object-fit: cover; 
+            object-position: center; 
+            z-index: -1; 
+            transition: background-color 0.15s; 
+        } 
+    
+        .detailButton {
+            position: absolute;
+            top: -100%;
+            right: 0; 
+            // transition: top 0.5s;
+        } 
+
+        &.active {
+            .detailButton {
+                top: 0;
+                right: 0;
+            }
+        }
+    }  
+
+    
+}
