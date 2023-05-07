@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/susithechain/static/css/main.5b85c6fe.css",
+    "main.js": "/susithechain/static/js/main.bf2cba54.js",
+    "static/media/skatevideo1.mp4": "/susithechain/static/media/skatevideo1.1f45413dcdde27d007bf.mp4",
+    "static/media/hero.jpg": "/susithechain/static/media/hero.f8d20e1c6d215e93e57e.jpg",
+    "static/media/help_map.jpg": "/susithechain/static/media/help_map.ec52a5d0a8f462cb97e6.jpg",
+    "static/media/stairs.png": "/susithechain/static/media/stairs.af8ec6e0295b9f380977.png",
+    "static/media/bg-magazine.jpg": "/susithechain/static/media/bg-magazine.eae3595906947677f2d3.jpg",
+    "static/media/help_input.jpg": "/susithechain/static/media/help_input.139347b6ad0e8a2999ba.jpg",
+    "static/media/gap.png": "/susithechain/static/media/gap.6dffafdf19b237a02208.png",
+    "static/media/bank.png": "/susithechain/static/media/bank.211bdc60f84a2ded1155.png",
+    "static/media/flat.png": "/susithechain/static/media/flat.8cfed4d8e645483ccb9b.png",
+    "static/media/skateparkdraw.png": "/susithechain/static/media/skateparkdraw.e6f8a71b1e13f3949320.png",
+    "static/media/ramp.png": "/susithechain/static/media/ramp.08083a9dbc83bddda2e3.png",
+    "static/media/skate_1.png": "/susithechain/static/media/skate_1.1ade38ab3963e48f16a5.png",
+    "static/media/ledge.png": "/susithechain/static/media/ledge.51dc23c632ef720636c2.png",
+    "static/media/rail.png": "/susithechain/static/media/rail.6a7d0c24998df6007137.png",
+    "static/media/trophy.png": "/susithechain/static/media/trophy.b0f61919a8e88506196f.png",
+    "static/media/map.png": "/susithechain/static/media/map.73948584a92a3fc87a6f.png",
+    "static/media/other.png": "/susithechain/static/media/other.b54b2d5108a8f8132bee.png",
+    "static/media/streetdraw.png": "/susithechain/static/media/streetdraw.536d72c30e0de3041707.png",
+    "index.html": "/susithechain/index.html",
+    "main.5b85c6fe.css.map": "/susithechain/static/css/main.5b85c6fe.css.map",
+    "main.bf2cba54.js.map": "/susithechain/static/js/main.bf2cba54.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5b85c6fe.css",
+    "static/js/main.bf2cba54.js"
+  ]
+}
