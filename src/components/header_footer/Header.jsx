@@ -44,25 +44,25 @@ const Header = () => {
                         
                         
                         <Link to = "/all-places?category=spots" className = "my-2">
-                            <div class = "d-flex align-items-center">
+                            <div className = "d-flex align-items-center">
                                 <img src = {rail} height = {50} alt = "rail icon" className = "me-3" />
                                 <h4>Street</h4>
                             </div>
                         </Link>
                         <Link to = "/all-places?category=skatepark" className = "my-2">
-                            <div class = "d-flex align-items-center">
+                            <div className = "d-flex align-items-center">
                                 <img src = {skateboard} height = {50} alt = "skateboard icon" className = "me-3" />
                                 <h4>Skateparky</h4>
                             </div>
                         </Link>
                         <Link to = "/find-place" className = "my-2">
-                            <div class = "d-flex align-items-center">
+                            <div className = "d-flex align-items-center">
                                 <img src = {map} height = {50} alt = "map icon" className = "me-3" />
                                 <h4>Mapa</h4>
                             </div>
                         </Link>
                         <Link to = "/add-place" className = "my-3">
-                            <div class = "d-flex align-items-center">
+                            <div className = "d-flex align-items-center">
                                 <img src = {add} height = {35} alt = "add icon" className = "me-3" />
                                 <h4>Nový spot</h4>
                             </div>

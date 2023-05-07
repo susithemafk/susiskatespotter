@@ -149,7 +149,11 @@ const SingleSpot = () => {
                 </div>
             </div>
 
-            <div className = {`${styles.discussion} mt-5 p-lg-5 p-3 container-medium mx-auto`}>
+            <div className = "separatorWrapper mt-5 px-lg-5 px-3 container-medium mx-auto">
+                <hr className = "" style = {{borderColor: 'black'}} />
+            </div>
+
+            <div className = {`${styles.discussion} px-lg-5 px-3 mt-4 container-medium mx-auto`}>
                 <h1 className = "fw-black mb-3">Diskuze</h1>
 
                 {spot?.comments ? Object.values(spot.comments).length > 0 &&
