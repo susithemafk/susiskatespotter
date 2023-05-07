@@ -1,8 +1,8 @@
 import { HashRouter, Routes, Route } from 'react-router-dom' 
 import Homepage from './pages/Homepage'  
-import FindSkatepark from './pages/FindSkatepark'
+import FindPlace from './pages/FindPlace'
 import LayoutBasic from './components/LayoutBasic' 
-import AddSkatepark from './pages/AddSkatepark'
+import AddPlace from './pages/AddPlace'
 
 import { useEffect, useState } from 'react'
 import SingleSkatepark from './pages/Skateparks/SingleSkatepark'
@@ -15,8 +15,10 @@ import Account from './pages/Account'
 import ProtectedRoutes from './components/ProtectedRoutes'
 
 import { GlobalAuthorizedContext } from './context/GlobalAuthorizedContext'
-import AllSpots from './pages/AllSpots'
+import AllPlaces from './pages/AllPlaces'
 import SingleSpot from './pages/Spots/SingleSpot'
+import EditPlace from './pages/EditPlace'
+import HowToAddSpot from './pages/AddPlace/HowToAddSpot'
 
 function App() {
 
@@ -42,13 +44,16 @@ function App() {
 						<Route index element = {<Homepage />} />
 						<Route path = "/log-in" element = {<LogIn />} />
 						<Route path = "/sign-up" element = {<SignUp />} />
-						<Route path = "/find-skatepark" element = {<FindSkatepark />} />
-						<Route path = "/all-spots" element = {<AllSpots />} />
+						<Route path = "/find-place" element = {<FindPlace />} />
+						<Route path = "/all-places" element = {<AllPlaces />} />
+						<Route path = "/how-to-add" element = {<HowToAddSpot />} />
 
 						<Route element = {<ProtectedRoutes />}>
 
 							<Route path = "/account" element = {<Account />} />
-							<Route path = "/add-skatepark" element = {<AddSkatepark />} /> 
+							<Route path = "/add-place" element = {<AddPlace />} />
+							<Route path = "/edit-place/:placeID" element = {<EditPlace />} />
+
 						</Route>
 
 						<Route path = "/skateparks/:skateparkID" element = {<SingleSkatepark />} />

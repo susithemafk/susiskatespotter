@@ -1,4 +1,4 @@
-import styles from "./AllSpots.module.scss"
+import styles from "./AllPlaces.module.scss"
 import { useState, useEffect, useRef } from "react" 
 import Button from '../components/Button' 
 import { Link } from "react-router-dom"
@@ -10,7 +10,7 @@ import { useLocation } from 'react-router-dom';
 import Select from 'react-select'
 import DropdownSingle from "../components/DropdownSingle"
 
-const AllSpots = () => {
+const AllPlaces = () => {
 
     const [categories, setCategories] = useState([
         {name: 'skatepark', active: true, id: 1, },
@@ -98,8 +98,8 @@ const AllSpots = () => {
     const sortSkateparks = (temp) => {
         const activeValue = sortByOptions.find(option => option.active === true).value 
 
-        console.log('temp')
-        console.log(temp)
+        // console.log('temp')
+        // console.log(temp)
         
         if (activeValue === 'newest') {
             temp.sort((a, b) => {
@@ -112,8 +112,8 @@ const AllSpots = () => {
             }) 
         } 
 
-        console.log('temp')
-        console.log(temp)
+        // console.log('temp')
+        // console.log(temp)
 
         // if (activeValue === 'closest') {
         //     temp.sort((a, b) => {
@@ -173,7 +173,7 @@ const AllSpots = () => {
         const searchedArray = filteredSkateparks.filter((skatepark) => {
             const regex = new RegExp(searchTerm, "gi") 
             return (
-                skatepark?.address.match(regex) ||
+                // skatepark?.address.match(regex) ||
                 skatepark?.name.match(regex) ||
                 skatepark?.city.match(regex)
             )
@@ -199,7 +199,7 @@ const AllSpots = () => {
     }, [searchFilteredSkateparks, filteredSkateparks])
 
     return (
-        <div className = {`${styles.allSpots} container-ml mx-auto pt-5`}>
+        <div className = {`${styles.allPlaces} container-ml mx-auto pt-5`}>
 
             <label htmlFor = "search" className = {`${styles.search} row mx-auto align-items-center px-4`}>
                 <div className = {`${styles.searchIcon} me-3 py-2`}>
@@ -217,7 +217,7 @@ const AllSpots = () => {
                 <DropdownMultiple categories = {categories} setCategories = {setCategories} className = " col-lg-4 mb-0 mb-md-0 col-md-6 col-12" />
 
                 <Button variant = "rounded" className = "ms-auto d-block mt-lg-0 mt-4" >
-                    <Link to = "/add-skatepark">Přidat spot</Link>
+                    <Link to = "/add-place">Přidat spot</Link>
                 </Button>
 
             </div> 
@@ -301,10 +301,10 @@ const AllSpots = () => {
 
             </div>
 
-            <section className = {`${styles.addSpot} text-center my-5`}>
+            <section className = {`${styles.addSpot} text-center my-5 px-3`}>
                 <h4 className = "fs-1 fw-800 mb-4">Chybí tu tvůj oblíbený spot?</h4>
                 <Button variant = "primary" className = "d-block mx-auto mt-lg-0 mb-5 fs-4" >
-                    <Link to = "/add-skatepark">Přidej ho!</Link>
+                    <Link to = "/add-place">Přidej ho!</Link>
                 </Button>
             </section>
         </div>
@@ -312,4 +312,4 @@ const AllSpots = () => {
 }
 
 
-export default AllSpots 
+export default AllPlaces 

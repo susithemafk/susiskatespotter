@@ -12,6 +12,7 @@ import DeleteComment from "../../components/Skateparks/DeleteComment"
 import { getAuth } from "firebase/auth"
 import { Link } from "react-router-dom"
 import findUserComments from '../../functions/findUserComments'
+import { HashLink } from 'react-router-hash-link'
 
 
 const SingleSpot = () => {
@@ -26,8 +27,6 @@ const SingleSpot = () => {
     const [users, setUsers] = useState({}) 
 
     useEffect(() => {window.scrollTo(0, 0)}, [])
-
-    // useEffect(() => {console.log(spot)}, [spot])
 
     /**
      * Loads spot and users from database
@@ -109,6 +108,9 @@ const SingleSpot = () => {
 
     const [submitMessage, setSubmitMessage] = useState('') 
 
+    // useEffect(() => {console.log(currentUser)}, [currentUser])
+    // useEffect(() => {console.log(spot)}, [spot])
+
     return (
         <div className = {styles.singleSkatepark}>
             
@@ -128,10 +130,16 @@ const SingleSpot = () => {
                                 <p className = "fw-600">Adresa: <span className = "fw-400">{spot.address}</span></p>
                                 <p className = "fw-600">Město: <span className = "fw-400">{spot.city}</span></p>
                                 <div className = "mt-4" style = {{cursor: 'pointer'}}>
-                                    <span className = "fw-600">Souřadnice: </span>
-                                    {copied ? <p>Copied to clipboard</p> : <p onClick = {() => copyValue(spot.lat, spot.lng)}>{spot.lat}, {spot.lng}</p>}
+                                    <span className = {`fw-600`}>Souřadnice: </span>
+                                    {copied ? <p>Zkopírováno do schránky</p> : <p className = {`${styles.copy}`} onClick = {() => copyValue(spot.lat, spot.lng)}>{spot.lat}, {spot.lng}</p>}
                                 </div>
-                                <Link to = {`/find-skatepark?spot=${spot.uuid}`}><Button variant = "secondary" className = "my-3">zobrazit na mapě</Button></Link>
+                                <Link to = {`/find-place?spot=${spot?.uuid}`}><Button variant = "primary" className = "mt-3 mb-2 me-3 d-block">zobrazit na mapě</Button></Link>
+                               
+                                {currentUser?.uuid === spot?.createdby &&
+                                <>
+                                    <Link to = {`/edit-place/${spot?.uuid}`}><Button variant = "red" className = "my-2 d-block">upravit</Button></Link>
+                                    <HashLink to = {`/account#${spot?.uuid}`}><Button variant = "red" className = "my-2 d-block">smazat</Button></HashLink>
+                                </>}
                             </div>
                             <Rating rating = {spot?.comments ? Object.values(spot.comments).map(comment => comment.rating) : []} width = {175} />
 
@@ -141,7 +149,7 @@ const SingleSpot = () => {
                 </div>
             </div>
 
-            <div className = {`${styles.discussion} mt-5 p-lg-5 p-3 container-medium mx-auto bg-primary`}>
+            <div className = {`${styles.discussion} mt-5 p-lg-5 p-3 container-medium mx-auto`}>
                 <h1 className = "fw-black mb-3">Diskuze</h1>
 
                 {spot?.comments ? Object.values(spot.comments).length > 0 &&
@@ -193,7 +201,7 @@ const SingleSpot = () => {
                 }
             </div>
 
-            <Link to = "/all-spots">
+            <Link to = "/all-places">
                 <Button variant = "primary" className = "my-5 mx-auto d-block">Zpět na všechny spoty</Button>
             </Link>
 

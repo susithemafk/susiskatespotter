@@ -11,7 +11,9 @@ import { GlobalAuthorizedContext } from "../../context/GlobalAuthorizedContext"
 import DeleteComment from "../../components/Skateparks/DeleteComment"
 import { getAuth } from "firebase/auth"
 import { Link } from "react-router-dom"
-import findUserComments from '../../functions/findUserComments'
+import findUserComments from '../../functions/findUserComments' 
+import { HashLink } from 'react-router-hash-link';
+
 
 const SingleSkatepark = () => {
 
@@ -127,10 +129,16 @@ const SingleSkatepark = () => {
                                     <p className = "fw-600">Adresa: <span className = "fw-400">{skatepark.address}</span></p>
                                     <p className = "fw-600">Město: <span className = "fw-400">{skatepark.city}</span></p>
                                     <div className = "mt-4" style = {{cursor: 'pointer'}}>
-                                        <span className = "fw-600">Souřadnice: </span>
-                                        {copied ? <p>Copied to clipboard</p> : <p onClick = {() => copyValue(skatepark.lat, skatepark.lng)}>{skatepark.lat}, {skatepark.lng}</p>}
+                                        <span className = {`fw-600`}>Souřadnice: </span>
+                                        {copied ? <p>Zkopírováno do schránky</p> : <p className = {`${styles.copy}`} onClick = {() => copyValue(skatepark.lat, skatepark.lng)}>{skatepark.lat}, {skatepark.lng}</p>}
                                     </div>
-                                    <Link to = {`/find-skatepark?spot=${skatepark.uuid}`}><Button variant = "secondary" className = "my-3">zobrazit na mapě</Button></Link>
+                                    <Link to = {`/find-place?spot=${skatepark.uuid}`}><Button variant = "primary" className = "mt-3 mb-2 me-3 d-block">zobrazit na mapě</Button></Link>
+                                
+                                    {currentUser?.uuid === skatepark?.createdby &&
+                                    <>
+                                        <Link to = {`/edit-place/${skatepark?.uuid}`}><Button variant = "red" className = "my-2 d-block">upravit</Button></Link>
+                                        <HashLink to = {`/account#${skatepark?.uuid}`}><Button variant = "red" className = "my-2 d-block">smazat</Button></HashLink>
+                                    </>}
                                 </div>
                                 <Rating rating = {skatepark.comments ? Object.values(skatepark.comments).map(comment => comment?.rating) : []} width = {175} />
 
@@ -141,7 +149,7 @@ const SingleSkatepark = () => {
                 </div>
             }
 
-            <div className = {`${styles.discussion} mt-5 p-lg-5 p-3 container-medium mx-auto bg-primary`}>
+            <div className = {`${styles.discussion} mt-5 p-lg-5 p-3 container-medium mx-auto`}>
                 <h1 className = "fw-black mb-3">Diskuze</h1>
 
                 {skatepark?.comments ? Object.values(skatepark.comments).length > 0 &&

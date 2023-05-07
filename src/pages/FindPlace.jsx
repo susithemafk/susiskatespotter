@@ -1,7 +1,7 @@
 import { useEffect, useState, useMemo } from "react" 
 
 import { db } from '../firebase'  
-import { uid } from 'uid'  
+import { uuid } from 'uuid'  
 import { set, ref, onValue, remove } from 'firebase/database' 
 
 import { useRef } from "react" 
@@ -65,7 +65,7 @@ const FindSkatepark = () => {
         })  
     }, []) 
 
-    useEffect(() => {console.log(skateparks)}, [skateparks])
+    // useEffect(() => {console.log(skateparks)}, [skateparks])
 
     /**
      * set active/selected spot
@@ -90,8 +90,8 @@ const FindSkatepark = () => {
     useEffect(() => {
         const queryParams = new URLSearchParams(location.search)
         const param = queryParams.get('spot')
-        console.log(param)
-        console.log(filteredSkateparks) 
+        // console.log(param)
+        // console.log(filteredSkateparks) 
 
         if (param && filteredSkateparks.length > 0) {
             const activeSkatepark = filteredSkateparks.find(skatepark => skatepark.uuid === param)
@@ -109,9 +109,9 @@ const FindSkatepark = () => {
         // mapRef.current.setCenter({lat, lng})
     }   
 
-    useEffect(() => {
-        console.log(selectedSkatepark)
-    }, [selectedSkatepark])
+    // useEffect(() => {
+        // console.log(selectedSkatepark)
+    // }, [selectedSkatepark])
 
     /**
      * copy coordinates to clipboard
@@ -125,9 +125,8 @@ const FindSkatepark = () => {
         }, 2000)
     }
 
-    const { isLoaded } = useLoadScript({
-        // googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-        googleMapsApiKey: 'AIzaSyAY8fTYH0eI9X0PUFuMJh3bMY40XH65fMU',
+    const { isLoaded, loadError } = useLoadScript({
+        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY, 
     }) 
 
     /**
@@ -225,7 +224,7 @@ const FindSkatepark = () => {
                             <DropdownMultiple categories = {categories} setCategories = {setCategories} className = "col-md-4 col-sm-6 col-12" />
 
                             <Button variant = "rounded" className = "ms-auto col-sm-3 d-sm-block d-none" >
-                                <Link to = "/add-skatepark">Přidat spot</Link>
+                                <Link to = "/add-place">Přidat spot</Link>
                             </Button>
                         </div>
                     </div>
@@ -292,10 +291,16 @@ const FindSkatepark = () => {
                                     // pixelOffset = {window.google.maps.Size(100, -3000)} 
                                 >
                                     <div>
-                                        <h3 className = "px-4 py-2 fw-900 fs-3 montserrat">{selectedSkatepark.name}</h3>
-                                        <Link to = {`/${selectedSkatepark?.category === 'skatepark' ? 'skateparks' : 'spots'}/${selectedSkatepark?.uuid}`}>
-                                            <Button variant = "primary" className = {`${styles.detailButton} mb-3 mt-1 mx-auto d-block`}>Detail</Button>
-                                        </Link>
+                                        <h3 className = "px-4 py-2 fw-900 fs-3 montserrat text-center">{selectedSkatepark.name}</h3>
+                                        <div className = "d-flex flex-wrap justify-content-center">
+                                            <Link to = {`/${selectedSkatepark?.category === 'skatepark' ? 'skateparks' : 'spots'}/${selectedSkatepark?.uuid}`}>
+                                                <Button variant = "primary" className = {`${styles.detailButton} mb-3 mx-2 fs-5 fw-800 mt-1 d-md-block d-none montserrat`}>Detail</Button>
+                                            </Link>
+                                            {/* <Link to = {`https://www.google.com/maps/@${selectedSkatepark.lat},${selectedSkatepark.lng},15z`} target = "_blank"> */}
+                                            <Link to = {`https://www.google.com/maps/search/?api=1&query=${selectedSkatepark.lat}%2C${selectedSkatepark.lng}`} target = "_blank">
+                                                <Button variant = "red" className = {`${styles.detailButton} mb-3 mx-2 fs-5 fw-800 mt-1 montserrat`}>Google Mapy</Button>
+                                            </Link>
+                                        </div>
                                     </div>
                                 </InfoWindowF> 
                                 

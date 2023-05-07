@@ -4,18 +4,12 @@ import { auth } from '../firebase'
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../components/Button' 
 import { GlobalAuthorizedContext } from '../context/GlobalAuthorizedContext'
+import styles from './LogIn.module.scss'
+import { useRef } from 'react';
 
 import videoFile from '../assets/skatevideo1.mp4'
 import poster from '../assets/hero.jpg' 
 import bgImage from '../assets/bg-magazine.jpg'
-
-const styles = {
-    backgroundImage: `linear-gradient(
-        rgba(0, 0, 0, 0.8), 
-        rgba(0, 0, 0, 0.8)
-      ), url(${bgImage})`, 
-    minHeight: "calc(100vh - 85px)"
-} 
 
 const inputStyle = {
     background: '#18123a', 
@@ -74,26 +68,46 @@ const LogIn = () => {
         if (authorized) {
             navigate('/')
         }
-    }, [authorized])
+    }, [authorized]) 
+
+    /**
+     * sets height of wrapper for safari, then set up in scss by %
+     */
+    const wrapperRef = useRef(null)
+    const setHeightsForSafari = () => {
+        const pageHeight = window.innerHeight - 85 // - header height
+
+        if (wrapperRef.current) {
+            wrapperRef.current.style.minHeight = `${pageHeight}px`
+        }
+    } 
+    useEffect(() => {
+        setHeightsForSafari()
+    }, [])
     
     return (
-        <div className="login" style = {styles}>
+        <div className = {`${styles.login} pb-5`} ref = {wrapperRef} style = {{backgroundImage: `linear-gradient(
+            rgba(0, 0, 0, 0.8), 
+            rgba(0, 0, 0, 0.8)
+          ), url(${bgImage})`  }}>
             
-            <h1 className = "text-center pt-5 text-light">Přihlášení</h1>
+            <h1 className = "text-center pt-lg-5 pt-4 text-light">Přihlášení</h1>
 
             <div className = "row flex-wrap container-large mx-auto">
 
                 <div className = "col-12 col-lg-6">
-                    <div className = "p-4">
+                    <div className = {`${styles.videoWrapper} m-4`}>
 
                         <video
                             width="100%" 
-                            height="600" 
+                            // height="600" 
                             poster={poster}
                             autoPlay
                             muted 
                             loop
                             playsInline
+
+                            className = {styles.video}
                         >
                             <source src={videoFile} type="video/mp4" />
                             Tvůj prohlížeč nepodporuje přehrávání videa.
@@ -103,17 +117,17 @@ const LogIn = () => {
 
                 <div className = "col-12 col-lg-6 mb-5 mt-3">
                 
-                    <form onSubmit = {logIn} className = "p-4">
+                    <form onSubmit = {logIn} className = "px-4 pt-lg-5">
                         <input required type = "email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" value = {email} placeholder = "Email" onChange = {e => setEmail(e.target.value)} style = {inputStyle} />
                         <input required type = "password" value = {password} placeholder = "Heslo" onChange = {e => setPassword(e.target.value)} style = {inputStyle} />
                         <p className = "text-light mb-2">{submitMessage}</p>
                         <Button variant = "primary loading" type = "submit" className = "mx-auto d-block" disabled = {loading ? true : false}>Přihlásit</Button>
                     </form>
 
-                    <div className = "text-center text-light mt-5 pt-5">
+                    <div className = "text-center text-light mt-5 pt-lg-5">
                         <h2>Nemáš ještě účet?</h2>
                         <Link to = "/sign-up">
-                            <Button variant = "primary" className = "mx-auto mt-4 d-block">Zaregistrovat se</Button>
+                            <Button variant = "primary" className = "mx-auto mt-lg-4 mt-2 d-block">Zaregistrovat se</Button>
                         </Link>
                     </div>
 

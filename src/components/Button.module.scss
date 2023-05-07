@@ -52,6 +52,45 @@
         background-color: darken($color: $secondary, $amount: 15); 
     }
 }
+
+.button.red {
+    background-color: $red;
+    color: white !important; 
+    font-weight: 700; 
+    border: 1px solid #000;
+    border-radius: 4px;
+    box-shadow: #fff 4px 4px 0 0,#000 4px 4px 0 1px; 
+    transition: box-shadow 0.4s, transform 0.3s; 
+
+    &:hover {
+        box-shadow: none; 
+        transform: scale(1.075); 
+    }
+
+    &:disabled {
+        color: $secondary; 
+        background-color: darken($color: $secondary, $amount: 15); 
+    }
+}
+.button.dark {
+    background-color: $darkgray;
+    color: white !important; 
+    font-weight: 700; 
+    border: 1px solid #000;
+    border-radius: 4px;
+    box-shadow: #fff 4px 4px 0 0,#000 4px 4px 0 1px; 
+    transition: box-shadow 0.4s, transform 0.3s; 
+
+    &:hover {
+        box-shadow: none; 
+        transform: scale(1.075); 
+    }
+
+    &:disabled {
+        color: $secondary; 
+        background-color: darken($color: $secondary, $amount: 15); 
+    }
+}
   
 .button.outline {
     background-color: transparent;

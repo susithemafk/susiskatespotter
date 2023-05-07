@@ -78,8 +78,8 @@ const DeleteComment = ({ object, comment, children }) => {
                 <div>
                     <p className = "text-end mb-3 fw-600">Opravdu smazat?</p>
                     <div className = "d-flex justify-content-end">
-                        <Button className = "mx-2" variant = "secondary loading" disabled = {loading ? true : false} onClick = {() => handleDelete(true)}>Ano</Button>
-                        <Button className = "mx-2" variant = "secondary loading" onClick = {() => setSure(false)}>Ne</Button>
+                        <Button className = "mx-2" variant = "red loading" disabled = {loading ? true : false} onClick = {() => handleDelete(true)}>Ano</Button>
+                        <Button className = "mx-2" variant = "red loading" onClick = {() => setSure(false)}>Ne</Button>
                     </div>
                 </div>
                 :

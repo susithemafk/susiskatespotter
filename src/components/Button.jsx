@@ -38,6 +38,16 @@ function Button(props) {
         case 'white':
           variantStyles = styles.white
           break; 
+        case 'red loading':
+          variantStyles = styles.red
+          loading = styles.loading
+          break; 
+        case 'red':
+          variantStyles = styles.red
+          break; 
+        case 'dark':
+          variantStyles = styles.dark
+          break; 
           
         default:
           variantStyles = styles.primary

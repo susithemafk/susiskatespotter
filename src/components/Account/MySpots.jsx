@@ -35,8 +35,8 @@ const MySpots = ({ places, currentUser }) => {
                 
                 {usersPlaces.map((skatepark, index) => {
                     return (
-                        <div key = {index} className = {`${styles.placeWrapper} row flex-wrap`}>
-                            <div key = {index} className = {`${styles.place} col-xl-8 col-12`}>
+                        <div key = {index} className = {`${styles.placeWrapper} row flex-wrap`} id = {skatepark.uuid}>
+                            <div key = {index} className = {`${styles.place} col-md-8 col-12`}>
                                 <Link to = {`/${skatepark?.category === 'skatepark' ? 'skateparks' : 'spots'}/${skatepark?.uuid}`}>
                                     <div className = "p-3">
 
@@ -52,8 +52,9 @@ const MySpots = ({ places, currentUser }) => {
 
                                 </Link>
                             </div>
-                            <div className = {`${styles.editdelete} ms-4 my-auto`}>
-                                <Button variant = "white" className = "d-block my-2">upravit</Button> 
+                            <div className = {`${styles.editdelete} ps-md-4 ps-3 col-md-4 col-12 flex-wrap my-auto`}>
+
+                                <Link to = {`/edit-place/${skatepark?.uuid}`}><Button variant = "white" className = "d-md-block d-inline my-2">upravit</Button></Link>
                                 
                                 <DeleteMySpot place = {skatepark} />
 

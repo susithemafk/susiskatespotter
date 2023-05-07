@@ -1,8 +1,9 @@
 
-import { db } from "../../firebase" 
+import { db, storage } from "../../firebase" 
 import { ref, remove } from "firebase/database"
 import { useState, useEffect } from "react" 
 import Button from '../Button' 
+import { ref as storageRef, deleteObject } from "firebase/storage"
 
 
 const DeleteMySpot = ({ place }) => {
@@ -34,33 +35,42 @@ const DeleteMySpot = ({ place }) => {
                         console.log(error)
                     })
             }
-            // remove(ref(db, `/users/${currentUser.uuid}/comments/${comment.commentid}`))
-            //     .then(() => {
-            //         console.log('removed from user database')
-            //         setSure(false)
-            //         setLoading(false)
-                        
-            //     })
-            //     .catch((error) => {
-            //         alert('error, try again later or leave us a message')
-            //         console.log(error)
-            //     })
         }
+        console.log(place)
+
+        // delete images that were deleted from the place
+        const imagesToDelete = place.images 
+        imagesToDelete?.map(image => {
+            if (image) {
+                const path = decodeURIComponent(image.match(/\/o\/(.+)\?alt=/)[1])
+                console.log(path)
+                
+                const fileRef = storageRef(storage, path)
+                deleteObject(fileRef)
+                .then(() => {
+                    console.log('deleted from storage') 
+                })
+                .catch((error) => {
+                    console.log('error deleting from storage') 
+                    console.log(error)
+                })
+            }
+        })
 
     } 
 
     return (
-        <div className = "text-end" onClick = {() => !sure ? setSure(true) : ''}>
+        <div className = "d-inline ms-md-0 ms-3" onClick = {() => !sure ? setSure(true) : ''}>
             {sure ? 
                 <div>
-                    <p className = "text-end mb-3 fw-600">Opravdu smazat?</p>
-                    <div className = "d-flex justify-content-end">
-                        <Button className = "mx-2" variant = "secondary loading" disabled = {loading ? true : false} onClick = {() => deleteMyPlace(place, true)}>Ano</Button>
-                        <Button className = "mx-2" variant = "secondary loading" onClick = {() => setSure(false)}>Ne</Button>
+                    <p className = "mb-3 fw-600">Opravdu smazat?</p>
+                    <div className = "d-flex flex-wrap">
+                        <Button className = "mx-2" variant = "red" onClick = {() => setSure(false)}>Ne</Button>
+                        <Button className = "mx-2 mt-md-2" variant = "red loading" disabled = {loading ? true : false} onClick = {() => deleteMyPlace(place, true)}>Ano</Button>
                     </div>
                 </div>
                 :
-                <Button variant = "secondary" className = "d-block my-2">smazat</Button>  
+                <Button variant = "red" className = "d-md-block d-inline my-2">smazat</Button>  
             }
         </div>
     )

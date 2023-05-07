@@ -6,7 +6,7 @@ const Carousel = ({ slides, interval }) => {
 
     const [currentIndex, setCurrentIndex] = useState(0)
     const [loading, setLoading] = useState(true) 
-    const [updSlides, setUpdSlides] = useState([])
+    const [updSlides, setUpdSlides] = useState(slides ?? [])
     useEffect(() => {if (slides) {setLoading(false)}}, [slides])
 
     const goPrevious = () => {
@@ -37,7 +37,12 @@ const Carousel = ({ slides, interval }) => {
                 </svg>
             </div>
 
-            <div className = {`${styles.slide}`} style = {{backgroundImage: `url(${updSlides ? updSlides[currentIndex] : ''})`}}></div> 
+            {
+                updSlides ? 
+                    <img className = {styles.slide} src={updSlides[currentIndex]} alt="carousel image of actual spot" /> 
+                    : 
+                    <div className = "center" style = {{height: 350}}><p className = "fw-900 fs-1 text-secondary">NAČÍTÁM</p></div>
+            }
 
             <div className = {`${styles.rightArrow} right-arrow`} onClick = {goNext}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="162.308" height="63.678" viewBox="0 0 162.308 63.678">

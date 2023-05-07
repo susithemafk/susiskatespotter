@@ -25,18 +25,25 @@
         right: 15px; 
         font-size: 20px; 
         z-index: 2;
+    } 
+
+    hr {
+        border: 1px solid black; 
+        width: 50%; 
+        margin: 0 auto;
     }
 } 
 
 #header .menutoggler {
-    line-height: 20px; 
-    cursor: pointer;  
-    // height: 40px; 
-    width: 40px; 
+    // height: 30px;
+    // line-height: 20px; 
+    // cursor: pointer;  
+    // // height: 40px; 
+    // width: 40px; 
 
-    svg {
-        margin-bottom: -14px;
-    }
+    // svg {
+    //     margin-bottom: -14px;
+    // }
 }
 
 .burgermenu, .burgerclickoutside {

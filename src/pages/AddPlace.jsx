@@ -10,10 +10,11 @@ import { getDownloadURL, uploadBytes } from 'firebase/storage'
 import { getAuth } from 'firebase/auth'
 import { onValue } from 'firebase/database' 
 import imageCompression from 'browser-image-compression'
+import { Link } from 'react-router-dom'
 
 import Select from 'react-select';
 
-const AddSkatepark = () => {
+const AddPlace = () => {
     const defaultSkatepark = {
         uuid: '', 
         name: '', 
@@ -35,6 +36,8 @@ const AddSkatepark = () => {
     const [category, setCategory] = useState('skatepark')
 
     const [currentUser, setCurrentUser] = useState(null) 
+
+    const [spotLink, setSpotLink] = useState('')
 
     /**
      * gets current user from database
@@ -63,6 +66,18 @@ const AddSkatepark = () => {
         setSubmitted(false)
     } 
 
+    function handlePaste(event) {
+        event.preventDefault();
+        const clipboardData = event.clipboardData.getData("Text")
+        const values = clipboardData.split(",")
+        if (values.length === 2 && !isNaN(values[0]) && !isNaN(values[1])) {
+            setSkatepark(prevState => ({ ...prevState, lat: Number(values[0].trim()) }))
+            setSkatepark(prevState => ({ ...prevState, lng: Number(values[1].trim()) })) 
+        } else {
+            // handle invalid input
+        }
+    }
+
     /**
      * begins the whole process of uploading data to database and storage
      */
@@ -82,11 +97,19 @@ const AddSkatepark = () => {
 
     // images input 
     const handleImageChange = (e) => {
+
+        const imagesWithNewName = Array.from(e.target.files).map((file) => {
+            const newFileName = `${Date.now()}-${file.name}`;
+            const tempImage = new File([file], newFileName, { type: file.type })
+            return tempImage
+        })
+
         if (e.target.files.length > 3) {
             alert("Only 3 files accepted.")
             document.querySelector('input[name="images"]').value = ''
         } else {
-            setSkatepark(prevState => ({ ...prevState, images: Array.from(e.target.files) }))
+            setSkatepark(prevState => ({ ...prevState, images: imagesWithNewName }))
+            // setSkatepark(prevState => ({ ...prevState, images: Array.from(e.target.files) }))
         }
     } 
 
@@ -163,6 +186,9 @@ const AddSkatepark = () => {
         setSkatepark(prevState => ({ ...prevState, createdby: currentUser.uuid })) 
         setSkatepark(prevState => ({ ...prevState, category: category.value }))
 
+        const tempSpotLink = skatepark.category === 'skatepark' ? `/skateparks/${uuid}` : `/spots/${uuid}`
+        setSpotLink(tempSpotLink) // for redirecting to the newly created spot
+
         // lets useeffect know that it can handle the data upload
         setDatabaseDataSet(true)
     }  
@@ -215,7 +241,7 @@ const AddSkatepark = () => {
 
     return (
         <div className = "mb-5 px-lg-0 px-4">
-            <h1 className = "text-center mt-5 mb-2 fs-1 pt-4 fw-900">Přidej nový spot</h1>
+            <h1 className = "text-center mt-5 mb-2 fs-1 pt-4 fw-900">{submitted ? "Úspěšně přídán, díky!" : "Přidej nový spot"}</h1>
             <p className = "text-center mb-4 container-medium fw-500 fs-4 mx-auto">Máš svůj oblíbený street spot nebo skatepark, který zde chybí?<br /> Poděl se s ostatníma!</p>
 
             <form onSubmit={handleSubmit} className = "container-small mx-auto">
@@ -230,7 +256,7 @@ const AddSkatepark = () => {
                     <div className = "col-lg-6 col-12 pe-lg-2">
                         <label>
                             Lat:
-                            <input required type="number" step = "any" name="lat" value={skatepark.lat} onChange={handleChange} />
+                            <input required type="number" step = "any" name="lat" value={skatepark.lat} onChange={handleChange} onPaste={handlePaste} />
                         </label>
                     </div>
                     <div className = "col-lg-6 col-12 ps-lg-2">
@@ -256,11 +282,23 @@ const AddSkatepark = () => {
                     Přidej obrázky, můžeš zvolit více souborů (max 3): 
                     <input required type="file" name="images" onChange={handleImageChange} multiple accept="image/png, image/gif, image/jpeg, image/webp" />
                 </label>
-
+                {submitted ? 
+                <Link to = {spotLink} className = "mx-auto d-block">
+                    <Button variant = "primary" type = "button" className = "mx-auto d-block">Zobrazit spot</Button>
+                </Link>
+                :
                 <Button variant = "primary loading" type = "submit" className = "mx-auto d-block" disabled = {loading ? true : false}>{submitted ? 'OK' : 'Přidat'}</Button>
+                }
             </form>
+
+            <div className = "help pb-4">
+                <h4 className = "text-center mt-5 mb-2 fs-2 pt-4 fw-800">Nevíš si rady?</h4>
+                <Link to = "/how-to-add">
+                    <Button variant = "primary" className = "d-block mx-auto">jak přidat spot</Button>
+                </Link>
+            </div>
         </div>
     )
 }
 
-export default AddSkatepark
+export default AddPlace

@@ -3,7 +3,11 @@
 
 .account {
     .container {
-        background-color: $yellow;
+        // background-color: $yellow;\
+        .details {
+            border: 1px solid black;
+            border-radius: 10px;
+        }
 
     }
 

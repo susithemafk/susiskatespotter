@@ -1,22 +1,17 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef, useContext } from 'react'
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from '../firebase'
 import { uid } from 'uid' 
 import { ref, set } from "firebase/database"; 
 import { useNavigate } from 'react-router-dom';
 import Button from '../components/Button'
+import { GlobalAuthorizedContext } from '../context/GlobalAuthorizedContext'
 
 import videoFile from '../assets/skatevideo1.mp4'
 import poster from '../assets/hero.jpg' 
 import bgImage from '../assets/bg-magazine.jpg'
 
-const styles = {
-    backgroundImage: `linear-gradient(
-        rgba(0, 0, 0, 0.8), 
-        rgba(0, 0, 0, 0.8)
-      ), url(${bgImage})`, 
-    minHeight: "calc(100vh - 85px)"
-} 
+import styles from './SignUp.module.scss'
 
 const inputStyle = {
     background: '#18123a', 
@@ -31,6 +26,8 @@ const SignUp = () => {
     const [password, setPassword] = useState('') 
     const [submitMessage, setSubmitMessage] = useState('')
     const [loading, setLoading] = useState(false)
+
+    const { authorized } = useContext(GlobalAuthorizedContext)
 
     const navigate = useNavigate()
 
@@ -91,25 +88,51 @@ const SignUp = () => {
                 setMessage(error)
             })
     } 
+
+    /**
+     * sets height of wrapper for safari, then set up in scss by %
+     */
+    const wrapperRef = useRef(null)
+    const setHeightsForSafari = () => {
+        const pageHeight = window.innerHeight - 85 // - header height
+
+        if (wrapperRef.current) {
+            wrapperRef.current.style.minHeight = `${pageHeight}px`
+        }
+    } 
+    useEffect(() => {
+        setHeightsForSafari()
+    }, [])
+
+    useEffect(() => {
+        if (authorized) {
+            navigate('/')
+        }
+    }, [authorized]) 
     
     return (
-        <div className="signup" style = {styles}>
+        <div className = {`${styles.signup}`} ref = {wrapperRef} style = {{backgroundImage: `linear-gradient(
+            rgba(0, 0, 0, 0.8), 
+            rgba(0, 0, 0, 0.8)
+          ), url(${bgImage})`  }}>
     
-            <h1 className = "text-center pt-5 text-light">Nový účet</h1>
+            <h1 className = "text-center pt-lg-5 pt-4 text-light">Nový účet</h1>
         
             <div className = "row flex-wrap container-large mx-auto">
 
                 <div className = "col-12 col-lg-6">
-                    <div className = "p-4">
+                    <div className = {`${styles.videoWrapper} m-4`}>
 
                         <video
                             width="100%" 
-                            height="600" 
+                            // height="600" 
                             poster={poster}
                             autoPlay
                             muted 
                             loop
                             playsInline
+
+                            className = {styles.video}
                         >
                             <source src={videoFile} type="video/mp4" />
                             Tvůj prohlížeč nepodporuje přehrávání videa.
@@ -118,7 +141,7 @@ const SignUp = () => {
                 </div>
                 
                 <form onSubmit = {signUp} className = "col-12 col-lg-6 mb-5 mt-3">
-                    <div className = "p-4">
+                    <div className = "px-4 pt-lg-5">
                         <input required type = "text" value = {username} placeholder = "Přezdívka" onChange = {e => setUsername(e.target.value)} style = {inputStyle} />
                         <input required type = "email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" value = {email} placeholder = "Email" onChange = {e => setEmail(e.target.value)} style = {inputStyle} />
                         <input required type = "password" value = {password} placeholder = "Heslo" onChange = {e => setPassword(e.target.value)} style = {inputStyle} />

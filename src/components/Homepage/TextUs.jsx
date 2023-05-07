@@ -11,13 +11,20 @@ const TextUs = () => {
 
     const authorized = useContext(GlobalAuthorizedContext)
 
-    const [name, setName] = useState(authorized?.authorized?.email ?? '')
-    const [email, setEmail] = useState(authorized?.authorized?.email ?? '') 
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('') 
     const [message, setMessage] = useState('')
     const [loading, setLoading] = useState(false)
     const [submitted, setSubmitted] = useState(false)
 
     const [currentUser, setCurrentUser] = useState({}) 
+
+    useEffect(() => {
+        if (authorized.authorized !== null && currentUser) {
+            setName(currentUser?.username || "")
+            setEmail(currentUser?.email || "")
+        }
+    }, [authorized])
 
     /**
      * gets all users from database
@@ -38,6 +45,8 @@ const TextUs = () => {
      * 
      */
     const handleSubmit = (e) => {
+        console.log(name) 
+        console.log(email)
         e.preventDefault()
         const uuid = uid() 
 
@@ -47,7 +56,7 @@ const TextUs = () => {
             name: name, 
             email: email, 
             message: message, 
-            sentby: authorized ? currentUser?.uuid : 'not logged in'
+            sentby: authorized.authorized !== null ? currentUser?.uuid : 'not logged in'
         } 
 
         set(ref(db, `/emails/${uuid}`), emailObject)
@@ -74,10 +83,10 @@ const TextUs = () => {
 
                 <div className = "row flex-wrap">
                     <div className = "col-lg-6 col-12 pe-lg-2">
-                        <input required type="text" placeholder = "Jméno" name="name" value={name} onChange={(e) => setName(authorized ? currentUser?.username : e.target.value)} />
+                        <input required type="text" placeholder = "Jméno" name="name" value={name} onChange={(e) => setName(authorized.authorized !== null ? currentUser?.username : e.target.value)} />
                     </div>
                     <div className = "col-lg-6 col-12 ps-lg-2">
-                        <input required type="text" placeholder = "Email" name="email" value={email} onChange={(e) => setEmail(authorized ? currentUser.email : e.target.value)} />
+                        <input required type="email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" placeholder = "Email" name="email" value={email} onChange={(e) => setEmail(authorized.authorized !== null ? currentUser?.email : e.target.value)} />
                     </div>
                 </div>
                 <textarea required name="message" placeholder = "Zpráva" value={message} onChange={(e) => setMessage(e.target.value)} />

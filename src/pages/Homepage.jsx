@@ -67,7 +67,7 @@ const Homepage = () => {
 
 
 
-            <section className = {`${styles.streetspots} my-5 px-lg-0 px-4`}>
+            <section className = {`${styles.streetspots} my-5 px-lg-0 px-3`}>
 
                 <div className = {`${styles.newTitle} row justify-content-center pb-md-4`}>
                     <div className = {`${styles.image} col-lg-2 pe-xl-5 col-4 ps-md-5 ps-3`}>
@@ -84,7 +84,7 @@ const Homepage = () => {
                     {spots.slice(0, 3).map((skatepark, index) => { return (
 
                         <div key = {index} className = {`${styles.streetspot} col-lg-4 col-sm-6 col-12`}>
-                            <Link to = {`/skateparks/${skatepark.uuid}`}>
+                            <Link to = {`/spots/${skatepark.uuid}`}>
                                 <div className = "p-3">
 
                                     <div className = {styles.background}>
@@ -104,13 +104,13 @@ const Homepage = () => {
 
                 </div>
 
-                <Link to = "/all-spots?category=spots">
+                <Link to = "/all-places?category=spots">
                     <Button variant = "primary" className = "mx-auto d-block fs-4 mt-lg-0 mt-4">všechny spoty</Button>
                 </Link>
 
             </section>
 
-            <section className = {`${styles.skateparks} my-5 px-lg-0 px-4`}>
+            <section className = {`${styles.skateparks} my-5 px-lg-0 px-3`}>
 
                 <div className = {`${styles.newTitle} row justify-content-center pb-md-4 px-lg-0 px-3`}>
                     <div className = "col-xl-3 col-sm-6 col-8 my-auto pb-4 pe-md-5 pe-2">
@@ -127,7 +127,7 @@ const Homepage = () => {
 
                     {skateparks.slice(0, 3).map((skatepark, index) => { return (
 
-                        <div key = {index} className = {`${styles.streetspot} col-xl-4 col-12`}>
+                        <div key = {index} className = {`${styles.streetspot} col-lg-4 col-sm-6 col-12`}>
                             <Link to = {`/skateparks/${skatepark.uuid}`}>
                                 <div className = "p-3">
 
@@ -150,13 +150,13 @@ const Homepage = () => {
 
                 </div>
 
-                <Link to = "/all-spots?category=skatepark">
+                <Link to = "/all-places?category=skatepark">
                     <Button variant = "primary" className = "mx-auto d-block fs-4 mt-lg-0 mt-4">všechny skateparky</Button>
                 </Link>
 
             </section>
 
-            <section className = {`${styles.weeklyBest} my-5 px-lg-0 px-5`}>
+            <section className = {`${styles.weeklyBest} my-5 px-lg-0 px-4`}>
                 {/* <h1 className = ""></h1> */}
                 <div className = {`${styles.places} row container-large mx-auto flex-wrap px-lg-5 px-0`}>
                 

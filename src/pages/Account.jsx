@@ -259,74 +259,78 @@ const Account = () => {
     } 
 
     return (
-        <div className = {`${styles.account} px-4`}>
+        <div className = {`${styles.account} px-md-4`}>
             
             <h1 className = "text-center mt-5 pt-3 fs-1 fw-800 mb-2">Můj účet</h1>
             <p className = "text-center fs-4 container-small mx-auto">zde si můžeš upravit svůj účet a procházet přidané komentáře</p>
 
-            <div className = {`${styles.container} container-medium mx-auto my-5 p-lg-5 p-4 fw-700`}>
+            <div className = {`${styles.container} container-medium mx-auto my-55 p-lg-5 p-4 fw-700`}>
 
-                <h1 className = "fs-2">Údaje</h1>
+                <div className = {`${styles.details} p-4`}>
 
-                <div className = "col-md-8 col-12">
+                    <h1 className = "fs-2">Údaje</h1>
 
-                    {!editingUsername ? 
-                        <div className = "d-flex justify-content-between pt-3">
-                            <p>Přezdívka: {currentUser.username}</p>
-                            <button className = "text-underline " onClick = {() => setEditingUsername(true)}>změnit</button>
-                        </div>
+                    <div className = "col-md-8 col-12">
+
+                        {!editingUsername ? 
+                            <div className = "d-flex justify-content-between pt-3">
+                                <p>Přezdívka: {currentUser.username}</p>
+                                <button className = "text-underline " onClick = {() => setEditingUsername(true)}>změnit</button>
+                            </div>
+                                
+                        : 
+
+                            <form onSubmit = {(e) => editUsername(e)} className = "row flex-wrap justify-content-between align-items-center mt-2 pt-1">
+                                <p className = "">Přezdívka: </p>
+                                <input required type = "text" minLength={5} value = {newUsername} placeholder = "Nová přezdívka" onChange = {e => setNewUsername(e.target.value)} className = "mb-0 w-100 my-2" />
+                                <button type = "reset" className = "px-2 text-underline" onClick = {() => {setEditingUsername(false); setNewUsername('')}}>zrušit</button>
+                                <button type = "submit" className = "px-2 text-underline">změnit</button>
+                            </form>
                             
-                    : 
-
-                        <form onSubmit = {(e) => editUsername(e)} className = "row flex-wrap justify-content-between align-items-center mt-2 pt-1">
-                            <p className = "">Přezdívka: </p>
-                            <input required type = "text" minLength={5} value = {newUsername} placeholder = "Nová přezdívka" onChange = {e => setNewUsername(e.target.value)} className = "mb-0 w-100 my-2" />
-                            <button type = "reset" className = "px-2 text-underline" onClick = {() => {setEditingUsername(false); setNewUsername('')}}>zrušit</button>
-                            <button type = "submit" className = "px-2 text-underline">změnit</button>
-                        </form>
+                        }
                         
-                    }
-                    
-                        <div className = "d-flex justify-content-between mt-2 pt-1">
-                            <p>Email: {currentUser.email}</p>
-                            <button className = {`text-underline ${editingEmail ? 'd-none' : ''}`} onClick = {() => setEditingEmail(true)}>změnit</button>
-                        </div>
+                            <div className = "d-flex justify-content-between mt-2 pt-1">
+                                <p>Email: {currentUser.email}</p>
+                                <button className = {`text-underline ${editingEmail ? 'd-none' : ''}`} onClick = {() => setEditingEmail(true)}>změnit</button>
+                            </div>
+                                
+                        {editingEmail ?
+
+                            <form onSubmit = {(e) => editEmail(e)} className = "row align-items-center justify-content-between mt-2 pt-1 mb-5 flex-wrap">
+                                <input required type = "password" value = {password} placeholder = "Heslo pro ověření" onChange = {e => setPassword(e.target.value)} className = "mb-2 w-100" />
+                                <input required type = "text" value = {newEmail} placeholder = "Nový email" onChange = {e => setNewEmail(e.target.value)} className = "mb-3 " />
+                                <button type = "reset" className = "me-3 text-underline" onClick = {() => {setEditingEmail(false); setNewEmail('')}}>zrušit</button>
+                                <button type = "submit" className = "text-underline">změnit</button>
+                            </form>
                             
-                    {editingEmail ?
+                        : ''} 
 
-                        <form onSubmit = {(e) => editEmail(e)} className = "row align-items-center justify-content-between mt-2 pt-1 mb-5 flex-wrap">
-                            <input required type = "password" value = {password} placeholder = "Heslo pro ověření" onChange = {e => setPassword(e.target.value)} className = "mb-2 w-100" />
-                            <input required type = "text" value = {newEmail} placeholder = "Nový email" onChange = {e => setNewEmail(e.target.value)} className = "mb-3 " />
-                            <button type = "reset" className = "me-3 text-underline" onClick = {() => {setEditingEmail(false); setNewEmail('')}}>zrušit</button>
-                            <button type = "submit" className = "text-underline">změnit</button>
-                        </form>
-                        
-                    : ''} 
+                        <button className = {`text-underline mt-2 pt-1 me-3 ${editingPassword ? 'd-none' : ''}`} onClick = {() => setEditingPassword(true)}>změnit heslo</button>
 
-                    <button className = {`text-underline mt-2 pt-1 me-3 ${editingPassword ? 'd-none' : ''}`} onClick = {() => setEditingPassword(true)}>změnit heslo</button>
+                        {editingPassword ?
+                            <form onSubmit = {(e) => editPassword(e)} className = "row align-items-center py-1 mt-2 mb-5 flex-wrap">
+                                <input required type = "password" value = {password} placeholder = "Staré heslo" onChange = {e => setPassword(e.target.value)} className = "mb-2 w-100" />
+                                <input required type = "password" value = {newPassword} placeholder = "Nové heslo" onChange = {e => setNewPassword(e.target.value)} className = "mb-3 " />
+                                <button type = "reset" className = "me-3 text-underline" onClick = {() => {setEditingPassword(false); setNewPassword('')}}>zrušit</button>
+                                <button type = "submit" className = "text-underline">změnit</button>
+                            </form>
+                        : ''}
 
-                    {editingPassword ?
-                        <form onSubmit = {(e) => editPassword(e)} className = "row align-items-center py-1 mt-2 mb-5 flex-wrap">
-                            <input required type = "password" value = {password} placeholder = "Staré heslo" onChange = {e => setPassword(e.target.value)} className = "mb-2 w-100" />
-                            <input required type = "password" value = {newPassword} placeholder = "Nové heslo" onChange = {e => setNewPassword(e.target.value)} className = "mb-3 " />
-                            <button type = "reset" className = "me-3 text-underline" onClick = {() => {setEditingPassword(false); setNewPassword('')}}>zrušit</button>
-                            <button type = "submit" className = "text-underline">změnit</button>
-                        </form>
-                    : ''}
+                        <button className = {`text-underline ${deletingAccount ? 'd-none' : ''}`} onClick = {() => setDeletingAccount(true)}>smazat účet</button>
 
-                    <button className = {`text-underline ${deletingAccount ? 'd-none' : ''}`} onClick = {() => setDeletingAccount(true)}>smazat účet</button>
+                        {deletingAccount ?
+                            <form onSubmit = {(e) => deleteAccount(e)} className = "row align-items-center py-1 mt-2 mb-5 flex-wrap">
+                                <input required type = "password" value = {password} placeholder = "Zadejte heslo" onChange = {e => setPassword(e.target.value)} className = "mb-2 w-100" />
+                                <button type = "reset" className = "me-3 text-underline" onClick = {() => {setDeletingAccount(false); setPassword('')}}>zrušit</button>
+                                <button type = "submit" className = "text-underline">smazat</button>
+                            </form>
+                        : ''}
 
-                    {deletingAccount ?
-                        <form onSubmit = {(e) => deleteAccount(e)} className = "row align-items-center py-1 mt-2 mb-5 flex-wrap">
-                            <input required type = "password" value = {password} placeholder = "Zadejte heslo" onChange = {e => setPassword(e.target.value)} className = "mb-2 w-100" />
-                            <button type = "reset" className = "me-3 text-underline" onClick = {() => {setDeletingAccount(false); setPassword('')}}>zrušit</button>
-                            <button type = "submit" className = "text-underline">smazat</button>
-                        </form>
-                    : ''}
+                    </div>
+
+                    <Button className = "mt-5 d-block" variant = "white" onClick = {userSignOut} text = "Sign Out">Odhlásit</Button>
 
                 </div>
-
-                <Button className = "mt-5 d-block" variant = "white" onClick = {userSignOut} text = "Sign Out">Odhlásit</Button>
 
                 <h1 className = "mt-5 fs-2">Moje komentáře</h1>
 

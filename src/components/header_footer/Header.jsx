@@ -4,6 +4,11 @@ import styles from "./Header.module.scss";
 import { useEffect, useState, useContext } from "react";  
 import { GlobalAuthorizedContext } from "../../context/GlobalAuthorizedContext";
 
+import rail from '../../assets/rail.png' 
+import skateboard from '../../assets/skate_1.png' 
+import map from '../../assets/map.png' 
+import add from '../../assets/add.png'
+
 const Header = () => {
 
     const { authorized, setAuthorized } = useContext(GlobalAuthorizedContext)
@@ -25,23 +30,46 @@ const Header = () => {
                                     } onClick = {toggleMenu}></div>
 
                 <nav className = { menuOpen ? 
-                                        `${styles.burgermenu} container-medium min-vh-100 h-100 bg-light` :
+                                        `${styles.burgermenu} container-medium min-vh-100 w-100 h-100 bg-light` :
                                         `${styles.burgermenu} ${styles.closed} container-medium min-vh-100 h-100 bg-light`
                                     }>
 
                     {/* MOBILE MENU */}
                     <button className = {styles.close} onClick = {toggleMenu}>&#10060;</button>
-                    <div className = "logo-and-close pt-5 pb-4 px-5 fw-900 fs-1 mb-5 bg-primary text-center">
+                    <div className = "logo-and-close pt-5 pb-3 px-5 fw-900 fs-1 bg-primaryy mt-4 text-center">
                         <Link onClick = {toggleMenu} to = "/">SKATESPOTTER</Link>
                     </div>
+                    <hr className = "mb-5" />
                     <ul className = "d-flex flex-column align-items-center fw-600 fs-2 mx-5" onClick = {toggleMenu}>
-                        <Link to = "/all-spots?category=skatepark"  className = "my-2">skateparky</Link>
-                        <Link to = "/all-spots?category=spots" className = "my-2">street spoty</Link>
-                        <Link to = "/find-skatepark" className = "my-2">mapa</Link>
-                        <Link to = "/add-skatepark" className = "my-2">přidat spot</Link>
-
+                        
+                        
+                        <Link to = "/all-places?category=spots" className = "my-2">
+                            <div class = "d-flex align-items-center">
+                                <img src = {rail} height = {50} alt = "rail icon" className = "me-3" />
+                                <h4>Street</h4>
+                            </div>
+                        </Link>
+                        <Link to = "/all-places?category=skatepark" className = "my-2">
+                            <div class = "d-flex align-items-center">
+                                <img src = {skateboard} height = {50} alt = "skateboard icon" className = "me-3" />
+                                <h4>Skateparky</h4>
+                            </div>
+                        </Link>
+                        <Link to = "/find-place" className = "my-2">
+                            <div class = "d-flex align-items-center">
+                                <img src = {map} height = {50} alt = "map icon" className = "me-3" />
+                                <h4>Mapa</h4>
+                            </div>
+                        </Link>
+                        <Link to = "/add-place" className = "my-3">
+                            <div class = "d-flex align-items-center">
+                                <img src = {add} height = {35} alt = "add icon" className = "me-3" />
+                                <h4>Nový spot</h4>
+                            </div>
+                        </Link>
+                        
                         {authorized ? 
-                            <div className = {`${styles.account} my-2`}>
+                            <div className = {`${styles.account} my-2 fw-800 mt-5 fs-1`}>
                                 <Link to = "/account">
                                     můj účet
                                 </Link>
@@ -55,23 +83,24 @@ const Header = () => {
 
                 {/* MENU TOGGLER */}
                 {/* <h2 className = {`${styles.menutoggler} d-md-none`} onClick = {toggleMenu}>ME<br/>NU</h2>  */}
-                <div className = {`${styles.menutoggler} d-md-none`} onClick = {toggleMenu}>
-                    <svg xmlns = "http://www.w3.org/2000/svg" viewBox = "0 0 41 26" >
-                            <g id = "navburger" transform = "translate(-166.5 -108.5)" >
-                                <line id = "Line_1" data-name = "Line 1" x2 = "40" transform = "translate(168.5 110.5)" fill = "black" stroke = "black" strokeLinecap = {'round'} strokeWidth = "4"/>
-                                <line id = "Line_2" data-name = "Line 2" x2 = "30" transform = "translate(168.5 121.5)" fill = "black" stroke = "black" strokeLinecap = {'round'} strokeWidth = "4"/>
-                            </g>
+                {/* <div className = {`${styles.menutoggler} d-md-none`} onClick = {toggleMenu}> */}
+                    <svg className = {`${styles.menutoggler} d-md-none`} onClick = {toggleMenu} xmlns="http://www.w3.org/2000/svg" width="56" height="17" viewBox="0 0 56 17">
+                        <g id="Group_40" data-name="Group 40" transform="translate(-427 -41)">
+                            <line id="Line_3" data-name="Line 3" x2="40" transform="translate(429.5 43.5)" fill="none" stroke="#000" strokeLinecap="round" strokeWidth="5"/>
+                            <line id="Line_4" data-name="Line 4" x2="30" transform="translate(429.5 55.5)" fill="none" stroke="#000" strokeLinecap="round" strokeWidth="5"/>
+                        </g>
                     </svg>
-                </div> 
+
+                {/* </div>  */}
 
                 {/* TITLE */}
                 <h1 className = {`${styles.title} ms-md-0 ms-auto`}><Link to = "/">skatespotter</Link></h1>
 
                 {/* NAV LINKS */}
                 <div className = {`${styles.links} ms-auto d-md-flex d-none`}>
-                    <Link to = "/all-spots?category=skatepark"  className = "my-auto">skateparky</Link>
-                    <Link to = "/all-spots?category=spots" className = "my-auto">street spoty</Link>
-                    <Link to = "/find-skatepark" className = "my-auto">mapa</Link>
+                    <Link to = "/all-places?category=skatepark"  className = "my-auto">skateparky</Link>
+                    <Link to = "/all-places?category=spots" className = "my-auto">street spoty</Link>
+                    <Link to = "/find-place" className = "my-auto">mapa</Link>
 
                     {authorized ? 
                         <div className = {`${styles.account} `}>

@@ -1,0 +1,93 @@
+
+
+
+.imageLabel {
+    position: relative; 
+    cursor: pointer; 
+
+    .overlay {
+        position: absolute; 
+        inset: 0; 
+        background-color: rgba(0, 0, 0, 0); 
+        height: 100%; 
+        width: 100%; 
+        transition: background-color 0.3s; 
+        border-radius: 5px;
+    }  
+
+    .imageInputLabel {
+        position: relative;
+        width: 100%;
+        border-radius: 5px;
+        padding: 0.6rem 0.9rem;
+        margin-bottom: 0.9rem;
+        font-size: 1rem;
+        background-color: #f2f2ff;
+        border: 1px solid #b5b5ff; 
+        font-family: 'Montserrat', sans-serif; 
+        resize : none; 
+
+        max-height: 400px;
+        
+        &:focus {
+            outline: none;
+            border: 1px solid #000FBF;
+        }  
+
+        input {
+            visibility: hidden; 
+            display: none;
+        } 
+
+        img {
+            // height: 100%; 
+            width: 100%; 
+            object-fit: contain; 
+        }    
+        
+    } 
+
+    .delete { 
+        padding: 1.2rem;
+        content: '\274C'; 
+        position: absolute; 
+        top: -0px; 
+        right: -0px; 
+        font-size: 2rem; 
+        z-index: 100000; 
+    }
+
+    &::after {
+        content: 'ZMĚNIT'; 
+        position: absolute; 
+        top: 50%; 
+        left: 50%; 
+        transform: translate(-50%, -50%); 
+        color: white; 
+        font-size: 1.5rem; 
+        font-weight: 700; 
+        opacity: 0; 
+        transition: opacity 0.3s; 
+        pointer-events: none;
+    } 
+
+    &:hover { 
+
+        .overlay {
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        &::after {
+            opacity: 1; 
+        }
+        
+    } 
+
+    
+
+    
+}
+.addNewImage {
+    background-color: #f2f2ff;
+    border: 1px solid #b5b5ff; 
+}
