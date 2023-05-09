@@ -1,12 +1,14 @@
 {
   "files": {
-    "main.css": "/susiskatespotter/static/css/main.b6c267a2.css",
-    "main.js": "/susiskatespotter/static/js/main.be27992e.js",
+    "main.css": "/susiskatespotter/static/css/main.952bcb4d.css",
+    "main.js": "/susiskatespotter/static/js/main.726a363a.js",
     "static/media/skatevideo1.mp4": "/susiskatespotter/static/media/skatevideo1.1f45413dcdde27d007bf.mp4",
     "static/media/hero.jpg": "/susiskatespotter/static/media/hero.f8d20e1c6d215e93e57e.jpg",
     "static/media/help_map.jpg": "/susiskatespotter/static/media/help_map.ec52a5d0a8f462cb97e6.jpg",
     "static/media/stairs.png": "/susiskatespotter/static/media/stairs.af8ec6e0295b9f380977.png",
     "static/media/bg-magazine.jpg": "/susiskatespotter/static/media/bg-magazine.eae3595906947677f2d3.jpg",
+    "static/media/hero1.webp": "/susiskatespotter/static/media/hero1.2ab85d3aec7e3747f0f2.webp",
+    "static/media/hero2.webp": "/susiskatespotter/static/media/hero2.e893a8fa401a438efb8d.webp",
     "static/media/help_input.jpg": "/susiskatespotter/static/media/help_input.139347b6ad0e8a2999ba.jpg",
     "static/media/gap.png": "/susiskatespotter/static/media/gap.6dffafdf19b237a02208.png",
     "static/media/bank.png": "/susiskatespotter/static/media/bank.211bdc60f84a2ded1155.png",
@@ -18,14 +20,22 @@
     "static/media/rail.png": "/susiskatespotter/static/media/rail.6a7d0c24998df6007137.png",
     "static/media/trophy.png": "/susiskatespotter/static/media/trophy.b0f61919a8e88506196f.png",
     "static/media/map.png": "/susiskatespotter/static/media/map.73948584a92a3fc87a6f.png",
+    "static/media/cb_logo.svg": "/susiskatespotter/static/media/cb_logo.57976b278175666394fe659a54ddfc32.svg",
     "static/media/other.png": "/susiskatespotter/static/media/other.b54b2d5108a8f8132bee.png",
+    "static/media/buttoncircle.svg": "/susiskatespotter/static/media/buttoncircle.7398fbf96df55029e7b1ecd211176311.svg",
     "static/media/streetdraw.png": "/susiskatespotter/static/media/streetdraw.536d72c30e0de3041707.png",
+    "static/media/praha_logo.svg": "/susiskatespotter/static/media/praha_logo.48fdb2ed4c15d261f3d6d29209ad8607.svg",
+    "static/media/ostrava_logo.svg": "/susiskatespotter/static/media/ostrava_logo.377115e1b23a5ed8cc918536928c3845.svg",
+    "static/media/plzen_logo.svg": "/susiskatespotter/static/media/plzen_logo.e820f614c2f7e13d2301796004f2ecbf.svg",
+    "static/media/liberec_logo.svg": "/susiskatespotter/static/media/liberec_logo.b149d537e14b628d6c3be74f702270b3.svg",
+    "static/media/olomouc_logo.svg": "/susiskatespotter/static/media/olomouc_logo.39156dbaf5321280a0b97748c5a3f271.svg",
+    "static/media/brno_logo.svg": "/susiskatespotter/static/media/brno_logo.22252ab34aa2370fa355146b33521cd2.svg",
     "index.html": "/susiskatespotter/index.html",
-    "main.b6c267a2.css.map": "/susiskatespotter/static/css/main.b6c267a2.css.map",
-    "main.be27992e.js.map": "/susiskatespotter/static/js/main.be27992e.js.map"
+    "main.952bcb4d.css.map": "/susiskatespotter/static/css/main.952bcb4d.css.map",
+    "main.726a363a.js.map": "/susiskatespotter/static/js/main.726a363a.js.map"
   },
   "entrypoints": [
-    "static/css/main.b6c267a2.css",
-    "static/js/main.be27992e.js"
+    "static/css/main.952bcb4d.css",
+    "static/js/main.726a363a.js"
   ]
 }
