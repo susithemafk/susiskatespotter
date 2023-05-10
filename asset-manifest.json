@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/susiskatespotter/static/css/main.265ff357.css",
-    "main.js": "/susiskatespotter/static/js/main.34c0b6ef.js",
+    "main.css": "/susiskatespotter/static/css/main.7458827e.css",
+    "main.js": "/susiskatespotter/static/js/main.35e49005.js",
     "static/media/skatevideo1.mp4": "/susiskatespotter/static/media/skatevideo1.1f45413dcdde27d007bf.mp4",
     "static/media/hero.jpg": "/susiskatespotter/static/media/hero.f8d20e1c6d215e93e57e.jpg",
     "static/media/help_map.jpg": "/susiskatespotter/static/media/help_map.ec52a5d0a8f462cb97e6.jpg",
@@ -14,7 +14,6 @@
     "static/media/bank.png": "/susiskatespotter/static/media/bank.211bdc60f84a2ded1155.png",
     "static/media/flat.png": "/susiskatespotter/static/media/flat.8cfed4d8e645483ccb9b.png",
     "static/media/skateparkdraw.png": "/susiskatespotter/static/media/skateparkdraw.e6f8a71b1e13f3949320.png",
-    "static/media/ramp.png": "/susiskatespotter/static/media/ramp.08083a9dbc83bddda2e3.png",
     "static/media/skate_1.png": "/susiskatespotter/static/media/skate_1.1ade38ab3963e48f16a5.png",
     "static/media/ledge.png": "/susiskatespotter/static/media/ledge.51dc23c632ef720636c2.png",
     "static/media/rail.png": "/susiskatespotter/static/media/rail.6a7d0c24998df6007137.png",
@@ -31,11 +30,11 @@
     "static/media/olomouc_logo.svg": "/susiskatespotter/static/media/olomouc_logo.39156dbaf5321280a0b97748c5a3f271.svg",
     "static/media/brno_logo.svg": "/susiskatespotter/static/media/brno_logo.22252ab34aa2370fa355146b33521cd2.svg",
     "index.html": "/susiskatespotter/index.html",
-    "main.265ff357.css.map": "/susiskatespotter/static/css/main.265ff357.css.map",
-    "main.34c0b6ef.js.map": "/susiskatespotter/static/js/main.34c0b6ef.js.map"
+    "main.7458827e.css.map": "/susiskatespotter/static/css/main.7458827e.css.map",
+    "main.35e49005.js.map": "/susiskatespotter/static/js/main.35e49005.js.map"
   },
   "entrypoints": [
-    "static/css/main.265ff357.css",
-    "static/js/main.34c0b6ef.js"
+    "static/css/main.7458827e.css",
+    "static/js/main.35e49005.js"
   ]
 }
