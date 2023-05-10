@@ -77,7 +77,7 @@ const TextUs = () => {
     return (
         <div className = {`text-us my-5 px-lg-5 container-medium mx-auto`}>
 
-            <h2 className = "mb-3 fs-1">Napište nám</h2>
+            <h2 className = "mb-3 fw-700 fs-2">Máš nápad na zlepšení? Napiš nám!</h2>
 
             <form onSubmit={handleSubmit} className = "">
 

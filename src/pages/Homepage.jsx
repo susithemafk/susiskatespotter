@@ -12,6 +12,8 @@ import { ref, onValue } from 'firebase/database'
 
 import WeeklyBest from '../components/Homepage/WeeklyBest'
 import TextUs from '../components/Homepage/TextUs'
+import LogoSlider from '../components/LogoSlider'
+import SecondSection from '../components/Homepage/SecondSection'
 
 
 const Homepage = () => {
@@ -53,8 +55,8 @@ const Homepage = () => {
                 </div>
                 <div className = {styles.overlay}></div>
                 <div className = {`${styles.content} row`}>
-                    <div className = "col-md-2"></div>
-                    <div className = "col-md-4 col-12 px-4">
+                    <div className = "col-lg-2"></div>
+                    <div className = "col-lg-4 col-12 px-4">
                         <h1 className = "fw-800 text-light display-2">NEJLEPŠÍ <br/>STREET <br/>SPOTY</h1>
                         <svg className = "ms-lg-5 ms-3 mt-4 px-md-0 px-3" xmlns="http://www.w3.org/2000/svg" width="162.308" height="63.678" viewBox="0 0 162.308 63.678">
                             <path id="Path_1" data-name="Path 1" d="M3308.262,598.979l74.205,50.674,74.205-50.674" transform="translate(-3301.313 -592.03)" fill="none" stroke="#fff" strokeLinecap="round" strokeWidth="10"/>
@@ -65,7 +67,13 @@ const Homepage = () => {
 
             </section> 
 
+            <section className = {`${styles.underHero} my-lg-5 my-3 px-lg-5 mx-auto px-3 container-large overflow-hidden`}>
+                <SecondSection />
+            </section>
 
+            <section className = {`${styles.logoSlider} my-5 px-lg-0`}>
+                <LogoSlider maxHeight = {60} animationTime = {'60s'} />
+            </section>
 
             <section className = {`${styles.streetspots} my-5 px-lg-0 px-3`}>
 
@@ -156,8 +164,7 @@ const Homepage = () => {
 
             </section>
 
-            <section className = {`${styles.weeklyBest} my-5 px-lg-0 px-4`}>
-                {/* <h1 className = ""></h1> */}
+            {/* <section className = {`${styles.weeklyBest} my-5 px-lg-0 px-4`}>
                 <div className = {`${styles.places} row container-large mx-auto flex-wrap px-lg-5 px-0`}>
                 
                     <div className = {`${styles.spot} col-md-6 col-12 pb-4`}>
@@ -173,7 +180,7 @@ const Homepage = () => {
 
                 
                 </div>
-            </section>
+            </section> */}
 
             <section className = {`${styles.textUs} my-5 px-lg-0 px-5`}>
 

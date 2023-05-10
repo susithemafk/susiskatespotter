@@ -85,7 +85,7 @@ const WeeklyBest = ({ children, places }) => {
     
             <p className = {`${styles.ratingCount} fs-5`}>{favPlace?.comments ? Object.values(favPlace?.comments).length : 0} hodnocení</p>
             <p className = {`${styles.rating} my-2 fs-5`}>&#9733;  {Math.round(favPlace?.rating / 20 * 100) / 100} / 5  &#9733;</p>
-            <p className = {`${styles.addedBy} mb-3 fs-5`}>Přidal: {placeOwner?.username}</p>
+            <p className = {`${styles.addedBy} mb-3 fs-5`}>Přidal: {placeOwner?.username || 'unknown'}</p>
 
             <Link to = {`/${favPlace?.category === 'skatepark' ? 'skateparks' : 'spots'}/${favPlace?.uuid}`}>
                 <Button variant = "white" className = "fs-5 mb-1">detail</Button>

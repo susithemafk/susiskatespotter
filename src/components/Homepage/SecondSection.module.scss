@@ -1,0 +1,96 @@
+@import '../../variables.scss'; 
+
+.secondSection {
+
+
+    .first, .second {
+        position: relative;
+
+        .imgWrapper {
+
+            img {
+                width: 400px;
+                height: 100%;
+                object-fit: cover; 
+
+                @media (max-width: $lg) {
+                    width: 50%;
+                }
+            }
+
+            @media (max-width: $lg) {
+                .buttonWrapper {
+                    top: -20px; 
+                    // left: 60%; 
+                    right: -15%;
+                    // transform: translateX(-50%);
+
+                    .roundButton {
+                        height: 130px; 
+                        width: 130px; 
+                        transition: transform 0.3s ease-in-out;
+
+                        &:hover {
+                            transform: scale(1.1);
+                        }
+                        
+                        .circleBg, #text {
+                            animation: rotate 25s linear infinite; 
+                            transform-origin: center;
+                        }  
+                        .circleBg {fill: #f2d027;}
+                        
+                        #arrow {
+                            transform-origin: center;
+                        }
+                    }
+                }
+            }
+        }
+    } 
+    
+    .second {
+        .imgWrapper {
+            img {
+                @media (max-width: $lg) {
+                    display: none !important;
+                }
+            }
+            .buttonWrapper {
+                width: 400px; 
+                height: max-content; 
+                position: relative; 
+
+                .roundButton {
+                    position: absolute; 
+                    top: -30px; 
+                    left: -90px; 
+                    height: 200px; 
+                    width: 200px; 
+                    transition: transform 0.3s ease-in-out;
+
+                    &:hover {
+                        transform: scale(1.1);
+                    }
+                    
+                    .circleBg, #text {
+                        animation: rotate 25s linear infinite; 
+                        transform-origin: center;
+                    }  
+                    .circleBg {fill: #f2d027;}
+                    
+                    #arrow {
+                        transform-origin: center;
+                    }
+                }
+            }
+        }
+    }
+
+    hr {
+        width: 70%; 
+        margin: 0; 
+    }
+
+    
+}

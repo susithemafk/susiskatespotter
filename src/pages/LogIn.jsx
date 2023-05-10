@@ -61,6 +61,7 @@ const LogIn = () => {
             setSubmitMessage('Nesprávné heslo')
         } else {
             setSubmitMessage('Něco se pokazilo')
+            console.log(code) 
         }
     } 
 

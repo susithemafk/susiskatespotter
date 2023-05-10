@@ -26,12 +26,27 @@ const MySpots = ({ places, currentUser }) => {
     } 
 
     useEffect(() => {
-        setUsersPlaces(findSkateparkByCreated())
+        let allPlaces = []
+        if (places[0] && places[1]) allPlaces = Object.assign(places[0], places[1]) // join skateparks and spots
+        if (currentUser.role ==='admin') {
+            allPlaces ? allPlaces = Object.values(allPlaces) : allPlaces = []
+            setUsersPlaces(allPlaces)
+        } else {
+            setUsersPlaces(findSkateparkByCreated())
+        }
     }, [places])
 
     return (
         <div className = {`${styles.mySpots}`}>
             <div className = {`${styles.placesWrapper}`}>
+
+                {usersPlaces.length === 0 &&
+                    <div className = "">
+                        <p className = "mt-2 fs-4 fw-400">Zatím jste nepřidali žádný spot</p>
+                        <Button variant = "primary" className = "mt-2 mb-5 fs-5" >
+                            <Link to = "/add-place">Přidej svůj první</Link>
+                        </Button>
+                    </div>}
                 
                 {usersPlaces.map((skatepark, index) => {
                     return (

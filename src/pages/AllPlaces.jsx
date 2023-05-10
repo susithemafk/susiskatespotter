@@ -11,6 +11,7 @@ import Select from 'react-select'
 import DropdownSingle from "../components/DropdownSingle"
 
 const AllPlaces = () => {
+    useEffect(() => {window.scrollTo(0, 0)}, [])
 
     const [categories, setCategories] = useState([
         {name: 'skatepark', active: true, id: 1, },
@@ -264,14 +265,14 @@ const AllPlaces = () => {
 
                                 <div className = {`${styles.categoryLabel} row`} style = {{backgroundColor: bgColor()}}>
                                     
-                                    <div className = {`${styles.icon}`}>
+                                    {/* <div className = {`${styles.icon}`}>
                                         <svg id="Group_18" data-name="Group 18" xmlns="http://www.w3.org/2000/svg" width="12.164" height="12.163" viewBox="0 0 12.164 12.163">
                                             <path id="Icon_material-crop-square" data-name="Icon material-crop-square" d="M10.922,6H6.7a.705.705,0,0,0-.7.7v4.219a.705.705,0,0,0,.7.7h4.219a.705.705,0,0,0,.7-.7V6.7A.705.705,0,0,0,10.922,6Zm0,4.922H6.7V6.7h4.219Z" transform="translate(-6 -6)" fill="#fff"/>
                                             <path id="Icon_material-crop-square-2" data-name="Icon material-crop-square" d="M10.922,6H6.7a.705.705,0,0,0-.7.7v4.219a.705.705,0,0,0,.7.7h4.219a.705.705,0,0,0,.7-.7V6.7A.705.705,0,0,0,10.922,6Zm0,4.922H6.7V6.7h4.219Z" transform="translate(0.538 -6)" fill="#fff"/>
                                             <path id="Icon_material-crop-square-3" data-name="Icon material-crop-square" d="M10.922,6H6.7a.705.705,0,0,0-.7.7v4.219a.705.705,0,0,0,.7.7h4.219a.705.705,0,0,0,.7-.7V6.7A.705.705,0,0,0,10.922,6Zm0,4.922H6.7V6.7h4.219Z" transform="translate(-6 0.538)" fill="#fff"/>
                                             <path id="Icon_material-crop-square-4" data-name="Icon material-crop-square" d="M10.922,6H6.7a.705.705,0,0,0-.7.7v4.219a.705.705,0,0,0,.7.7h4.219a.705.705,0,0,0,.7-.7V6.7A.705.705,0,0,0,10.922,6Zm0,4.922H6.7V6.7h4.219Z" transform="translate(0.538 0.538)" fill="#fff"/>
                                         </svg>
-                                    </div>
+                                    </div> */}
                                     <p>{skatepark.category}</p>
 
                                 </div>
@@ -279,7 +280,7 @@ const AllPlaces = () => {
                             </div>
                             
                             <div className = {`${styles.content}`}>
-                                <h3 className = {`${styles.title} mt-4`}>{skatepark.name}</h3>
+                                <h3 className = {`${styles.title} mt-4 px-2`}>{skatepark.name}</h3>
                                 <div className = {`${styles.details} row flex-wrap py-3`}>
                                     <div className = {`${styles.titles} col-6 ps-2 pe-3 py-3`}>
                                         <p>Kategorie</p>

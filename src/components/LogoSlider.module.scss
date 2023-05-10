@@ -1,0 +1,44 @@
+.logoSlider {
+    overflow: hidden;
+    --animation-time: 10s; 
+    user-select: none; 
+
+
+    .logoSliderWrapper {
+        position: relative; 
+        height: 100%;  
+    }
+
+    .first {
+        animation: logos-slide-first-time calc(var(--animation-time)/2) linear, logos-slide-loop var(--animation-time) linear; 
+        animation-delay: 0s, calc(var(--animation-time)/2); 
+        animation-iteration-count: 1, infinite; 
+        animation-direction: reverse, reverse; 
+    }  
+      
+    .second { 
+        transform: translateX(-100%);
+        animation: logos-slide-loop var(--animation-time) linear infinite; 
+        animation-delay: 0s; 
+        animation-direction: reverse, reverse; 
+    } 
+}
+
+
+
+@keyframes logos-slide-first-time {
+    from {
+        transform: translateX(-100%); 
+    } 
+    to {
+        transform: translateX(0%);
+    }
+    }
+    @keyframes logos-slide-loop {
+    from {
+        transform: translateX(-100%);
+    } 
+    to {
+        transform: translateX(100%);
+    }
+}

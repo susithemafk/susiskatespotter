@@ -17,6 +17,8 @@ import { HashLink } from 'react-router-hash-link'
 
 const SingleSpot = () => {
 
+    useEffect(() => {window.scrollTo(0, 0)}, [])
+    
     const { authorized } = useContext(GlobalAuthorizedContext)
 
     const { spotID } = useParams()
@@ -103,7 +105,13 @@ const SingleSpot = () => {
             matchedComments = [...matchedComments, found]
         })
 
-        setCommentsMatched(matchedComments)
+        const allComments = spot?.comments ? Object.values(spot.comments) : []
+
+        if (currentUser?.role === 'admin') {
+            setCommentsMatched(allComments)
+        } else {
+            setCommentsMatched(matchedComments)
+        }
     }, [currentUser])
 
     const [submitMessage, setSubmitMessage] = useState('') 
@@ -124,21 +132,25 @@ const SingleSpot = () => {
                     </div>
                     <div className = "col-12 col-lg-5 py-lg-5 p-3">
                         <div className = {styles.details}>
-                            <div>
+                            <div className = "fs-5">
                                 <h1 className = "fw-black mb-3">{spot.name}</h1>
                                 <p className = "mb-4">{spot.description}</p>
-                                <p className = "fw-600">Adresa: <span className = "fw-400">{spot.address}</span></p>
-                                <p className = "fw-600">Město: <span className = "fw-400">{spot.city}</span></p>
+                                <p className = "fw-500">Adresa: <span className = "fw-600">{spot.address}</span></p>
+                                <p className = "fw-500">Město: <span className = "fw-600">{spot.city}</span></p>
+                                <p className = "fw-500">Kategorie: <span className = "fw-600">{spot.category}</span></p>
                                 <div className = "mt-4" style = {{cursor: 'pointer'}}>
                                     <span className = {`fw-600`}>Souřadnice: </span>
                                     {copied ? <p>Zkopírováno do schránky</p> : <p className = {`${styles.copy}`} onClick = {() => copyValue(spot.lat, spot.lng)}>{spot.lat}, {spot.lng}</p>}
                                 </div>
                                 <Link to = {`/find-place?spot=${spot?.uuid}`}><Button variant = "primary" className = "mt-3 mb-2 me-3 d-block">zobrazit na mapě</Button></Link>
+                                <Link to = {`https://www.google.com/maps/search/?api=1&query=${spot.lat}%2C${spot.lng}`} target = "_blank">
+                                    <Button variant = "secondary" className = {`${styles.detailButton} mb-2 fs-5 fw-800 mt-1 montserrat`}>Google Mapy</Button>
+                                </Link>
                                
-                                {currentUser?.uuid === spot?.createdby &&
+                                {(currentUser?.uuid === spot?.createdby || currentUser?.role === 'admin') &&
                                 <>
                                     <Link to = {`/edit-place/${spot?.uuid}`}><Button variant = "red" className = "my-2 d-block">upravit</Button></Link>
-                                    <HashLink to = {`/account#${spot?.uuid}`}><Button variant = "red" className = "my-2 d-block">smazat</Button></HashLink>
+                                    <HashLink to = {`/account#${spot?.uuid}`}><Button variant = "red" className = "mt-2 mb-3 d-block">smazat</Button></HashLink>
                                 </>}
                             </div>
                             <Rating rating = {spot?.comments ? Object.values(spot.comments).map(comment => comment.rating) : []} width = {175} />
@@ -173,7 +185,7 @@ const SingleSpot = () => {
                                         <path id="Icon_awesome-user-alt" data-name="Icon awesome-user-alt" d="M18,20.25A10.125,10.125,0,1,0,7.875,10.125,10.128,10.128,0,0,0,18,20.25Zm9,2.25H23.126a12.24,12.24,0,0,1-10.252,0H9a9,9,0,0,0-9,9v1.125A3.376,3.376,0,0,0,3.375,36h29.25A3.376,3.376,0,0,0,36,32.625V31.5A9,9,0,0,0,27,22.5Z"/>
                                     </svg>
                                 </div>
-                                <p className = "fw-600">{userName}</p>
+                                <p className = "fw-600">{userName ? userName : 'unknown'}</p>
                                 <Rating rating = {[comment.rating]} showCount = {false} width = {100} black = {true} />
                             </div>
 

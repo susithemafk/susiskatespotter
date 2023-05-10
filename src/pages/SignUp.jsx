@@ -6,6 +6,8 @@ import { ref, set } from "firebase/database";
 import { useNavigate } from 'react-router-dom';
 import Button from '../components/Button'
 import { GlobalAuthorizedContext } from '../context/GlobalAuthorizedContext'
+import { getAuth } from "firebase/auth";
+import { onValue } from "firebase/database";
 
 import videoFile from '../assets/skatevideo1.mp4'
 import poster from '../assets/hero.jpg' 
@@ -69,25 +71,54 @@ const SignUp = () => {
     const signUp = (e) => {
         e.preventDefault() 
         setLoading(true)
+        console.log(checkUsernameAvailability(username))
 
-        createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                // Signed up 
-                const user = userCredential.user 
-                registerUser()
+        if (checkUsernameAvailability(username)) {
 
-                console.log('signed up')
-                console.log(user)
-            })
-            .catch((error) => {
-                // Not signed up
-                console.log('not signed up')
-                console.log(error)
-                setLoading(false)
-                
-                setMessage(error)
-            })
+            createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    // Signed up 
+                    const user = userCredential.user 
+                    registerUser()
+
+                    console.log('signed up')
+                    // console.log(user)
+                })
+                .catch((error) => {
+                    // Not signed up
+                    console.log('not signed up')
+                    console.log(error)
+                    setLoading(false)
+                    
+                    setMessage(error)
+                })
+
+        } else {
+            setSubmitMessage('Přezdívka je již použitá')
+            setLoading(false)
+        }
     } 
+
+    /**
+     * gets all users from database
+     */
+    const [data, setData] = useState(null)
+    useEffect(() => {
+        onValue(ref(db), (snapshot) => {
+            // gets all data from database
+            const data = snapshot.val()
+            setData(data) 
+        })
+    }, [])
+
+    /**
+     * checks if username is already taken
+     */
+    const checkUsernameAvailability = (username) => {
+        const user = Object.values(data?.users).find(user => user.username === username) 
+        if (user) return false 
+        else return true
+    }
 
     /**
      * sets height of wrapper for safari, then set up in scss by %
@@ -149,7 +180,7 @@ const SignUp = () => {
                         <Button variant = "primary loading" type = "submit" className = "mx-auto d-block" disabled = {loading ? true : false}>Zaregistrovat</Button>
                     </div>
                 </form>
-    
+
             </div>
         </div>
     )

@@ -41,6 +41,20 @@ prejmenovat sshkey do gitu a otestovat jestli funguje - clonovat skrz ssh treba
 
 //nemuzes deletnout posledni image v editu 
 
-deletemyspot - pridat smazani prislusnych obrazku
+//deletemyspot - pridat smazani prislusnych obrazku
 
 allplaces pridat osetreni nadpisu na one liner stejne jako na findallspots 
+
+ban update path url place kdyz nejsi autor
+
+registrace a uprava username check jestli uz uzivatelsko jmeno neexistuje 
+
+vyresit na mapě aby šlo klikat přes ten top div 
+pridat move to current location button 
+
+do add spot pridat misto mesta select kterej bude objekt vsech mest v cesku a budes moc selectnout 
+pak mozna dat hledani i mesto
+u search boxu pridat no hover neco jako Muzes hledat dle mesta nebo nazvu spotu 
+upravit hero nazev na nejnovejsi ne nejlepsi 
+upravit na iphonu zobrazeni kategorie spotu v allplaces 
+do single pridat nazev kategorie

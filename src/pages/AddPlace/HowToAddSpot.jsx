@@ -4,7 +4,11 @@ import Button from "../../components/Button"
 import help_map from "../../assets/help_page_images/help_map.jpg"
 import help_input from "../../assets/help_page_images/help_input.jpg"
 
+import { useEffect } from "react"
+
 const HowToAddSpot = () => {
+
+    useEffect(() => {window.scrollTo(0, 0)}, [])
 
     return (
         <div className = {`${''} container-medium mx-auto p-lg-5 p-4`}>

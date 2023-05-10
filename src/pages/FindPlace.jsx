@@ -10,9 +10,9 @@ import DropdownMultiple from "../components/DropdownMultiple"
 
 import { GoogleMap, InfoWindowF, MarkerF, useLoadScript } from "@react-google-maps/api"
 
-import styles from './FindSkatepark.module.scss' 
+import styles from './FindPlace.module.scss' 
 
-import { Link, useLocation } from "react-router-dom"
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom"
 
 
 import skateIcon from '../assets/skate_1.png' 
@@ -20,10 +20,10 @@ import flat from '../assets/flat.png'
 import gap from '../assets/gap.png' 
 import ledge from '../assets/ledge.png' 
 import rail from '../assets/rail.png' 
-import ramp from '../assets/ramp.png' 
 import stairs from '../assets/stairs.png' 
 import bank from '../assets/bank.png' 
 import other from '../assets/other.png'
+import userlocation from '../assets/userlocation.png'
     
 
 
@@ -79,7 +79,7 @@ const FindSkatepark = () => {
             panTo(selectedSkatepark?.lat, selectedSkatepark?.lng)
 
             // scrolls in list to selected skatepark
-            itemRefs.current[filteredSkateparks.indexOf(selectedSkatepark)]?.scrollIntoView({
+            itemRefs?.current[filteredSkateparks.indexOf(selectedSkatepark)]?.scrollIntoView({
                 behavior: "smooth",
                 block: "center"
             })
@@ -87,26 +87,58 @@ const FindSkatepark = () => {
 
     }, [selectedSkatepark])
     // on load check params for active skatepark
+    const navigate = useNavigate()
     useEffect(() => {
         const queryParams = new URLSearchParams(location.search)
         const param = queryParams.get('spot')
-        // console.log(param)
-        // console.log(filteredSkateparks) 
 
         if (param && filteredSkateparks.length > 0) {
             const activeSkatepark = filteredSkateparks.find(skatepark => skatepark.uuid === param)
             const activeIndex = filteredSkateparks.indexOf(activeSkatepark)
-
+            // navigate('/find-place', {replace: true, state: {activeIndex: activeIndex}}')
+            
+            navigate('/find-place')
             setSelectedSkatepark(activeSkatepark)
         }
     }, [location, filteredSkateparks])
 
+    const [userLocation, setUserLocation] = useState(null)
     const mapRef = useRef(null) 
-    const onMapLoad = (map) => {mapRef.current = map}
+    const onMapLoad = (map) => {
+        mapRef.current = map 
+
+        mapRef.current?.setCenter({
+            lat: 50.08949897498063,
+            lng: 14.439616051195364, 
+        }) 
+
+        // set default location by user location
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                setUserLocation({
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude,
+                }) 
+                mapRef.current?.setCenter({
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude,
+                })
+            },
+            (error) => {
+                console.log(error)
+            }
+        )
+    } 
+
+    /**
+     * pan and zoom to selected skatepark
+     */
     const panTo = (lat, lng) => {
-        mapRef.current?.panTo({lat, lng})
-        mapRef.current?.setZoom(16) 
-        // mapRef.current.setCenter({lat, lng})
+        mapRef.current?.setOptions({
+            center: {lat: lat, lng: lng}, 
+            zoom: 16,
+        })
+        mapRef.current?.panTo({lat: lat, lng: lng})
     }   
 
     // useEffect(() => {
@@ -169,8 +201,8 @@ const FindSkatepark = () => {
 
             <div ref = {wrapperRef} className = {`${styles.wrapper} row flex-lg-nowrap flex-wrap`}>
 
-                <div className = {`${styles.skateparksWrapper} col-lg-4 col-12 order-lg-0 order-1`}>
-                    <div className = "ps-lg-4 pe-lg-0 ps-3 pe-3">
+                <div className = {`${styles.skateparksWrapper} col-lg-4 col-12 order-lg-0 order-1 d-lg-flex d-none`}>
+                    <div className = "ps-lg-4 pe-lg-4 ps-3 pe-3 w-100">
                     {loading && (
                         <div>
                             <p className = "fs-1">Loading...</p>
@@ -192,7 +224,7 @@ const FindSkatepark = () => {
                                 <div className = {`${styles.content} p-3`}>
                                     <h2 className = "fs-2">{skatepark.name}</h2>
                                     <div className = {`${styles.details}`}>
-                                        <p>ID spotu: <span className = "ps-auto">{skatepark.uuid}</span></p>
+                                        {/* <p>ID spotu: <span className = "ps-auto">{skatepark.uuid}</span></p> */}
                                         <p>Adresa: {skatepark.address}</p>
                                         <p>Město: {skatepark.city}</p>
                                         <div style = {{cursor: 'pointer'}}>
@@ -212,7 +244,7 @@ const FindSkatepark = () => {
 
                 </div>
                 
-                <div className = {`${styles.mapWrapper} col-lg-8 col-12 p-lg-4 px-3`}>
+                <div className = {`${styles.mapWrapper} col-lg-8 col-12 p-lg-4 px-0`}>
                     {loading && (
                         <div>
                             <p className = "fs-1">Loading map...</p>
@@ -220,8 +252,8 @@ const FindSkatepark = () => {
                     )} 
 
                     <div className = {`${styles.categories} my-3 p-lg-4 px-3 w-100`}>
-                        <div className = "row flex-wrap px-3">
-                            <DropdownMultiple categories = {categories} setCategories = {setCategories} className = "col-md-4 col-sm-6 col-12" />
+                        <div className = "row flex-wrap px-lg-3">
+                            <DropdownMultiple categories = {categories} setCategories = {setCategories} className = "col-md-4 col-sm-6 col-12" style = {{display: selectedSkatepark? 'none' : 'block'}} />
 
                             <Button variant = "rounded" className = "ms-auto col-sm-3 d-sm-block d-none" >
                                 <Link to = "/add-place">Přidat spot</Link>
@@ -234,17 +266,19 @@ const FindSkatepark = () => {
                         <GoogleMap 
                             mapContainerClassName = {styles.map} 
                             onLoad = {onMapLoad} 
-                            onClick={() => {setSelectedSkatepark(null); mapRef.current.setZoom(13)}} 
+                            onClick={() => {setSelectedSkatepark(null); mapRef.current?.setZoom(13)}} 
 
                             options = {{
                                 // set one finger gesture for mobile
                                 gestureHandling: 'greedy', 
                                 mapTypeId: 'satellite', 
                                 clickableIcons: false, 
-                                center: {lat: 50.08949897498063, lng: 14.439616051195364}, 
+                                // center: userLocation ? {lat: userLocation.lat, lng: userLocation.lng} : {lat: 50.08949897498063, lng: 14.439616051195364}, 
+                                // center: {lat: 50.08949897498063, lng: 14.439616051195364}, 
                                 zoom: 13, 
                                 minZoom: 8, 
                                 // maxZoom: 18, 
+                                 
 
                             }}
                         >
@@ -279,6 +313,14 @@ const FindSkatepark = () => {
                                             }
                                         >
                                         </MarkerF>
+                                        {userLocation && 
+                                        <MarkerF 
+                                            position={userLocation} 
+                                            icon={{
+                                                url: userlocation,
+                                                scaledSize: {width: 25, height: 25},
+                                            }}    
+                                        />}
                                     </div>
                                 )
                             })}
@@ -287,14 +329,14 @@ const FindSkatepark = () => {
 
                                 <InfoWindowF 
                                     position = {{lat: selectedSkatepark.lat, lng: selectedSkatepark.lng}}
-                                    onCloseClick={() => {setSelectedSkatepark(null); mapRef.current.setZoom(13)}}  
+                                    onCloseClick={() => {setSelectedSkatepark(null); mapRef.current?.setZoom(13)}}  
                                     // pixelOffset = {window.google.maps.Size(100, -3000)} 
                                 >
                                     <div>
-                                        <h3 className = "px-4 py-2 fw-900 fs-3 montserrat text-center">{selectedSkatepark.name}</h3>
+                                        <h3 className = "py-2 fw-900 fs-3 montserrat text-center">{selectedSkatepark.name}</h3>
                                         <div className = "d-flex flex-wrap justify-content-center">
                                             <Link to = {`/${selectedSkatepark?.category === 'skatepark' ? 'skateparks' : 'spots'}/${selectedSkatepark?.uuid}`}>
-                                                <Button variant = "primary" className = {`${styles.detailButton} mb-3 mx-2 fs-5 fw-800 mt-1 d-md-block d-none montserrat`}>Detail</Button>
+                                                <Button variant = "primary" className = {`${styles.detailButton} mb-2 mx-2 fs-5 fw-800 mt-1 d-block  montserrat`}>Detail</Button>
                                             </Link>
                                             {/* <Link to = {`https://www.google.com/maps/@${selectedSkatepark.lat},${selectedSkatepark.lng},15z`} target = "_blank"> */}
                                             <Link to = {`https://www.google.com/maps/search/?api=1&query=${selectedSkatepark.lat}%2C${selectedSkatepark.lng}`} target = "_blank">

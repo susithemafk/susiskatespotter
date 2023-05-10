@@ -75,7 +75,9 @@ const Header = () => {
                                 </Link>
                             </div>
                                     :
-                            <Link to = "/log-in">přihlášení</Link>
+                            <div className = {`my-2 fw-800 mt-5 fs-1 text-underline`}>
+                                <Link to = "/log-in">přihlášení</Link>
+                            </div>
                         }
                     </ul>
                 </nav>

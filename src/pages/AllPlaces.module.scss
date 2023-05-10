@@ -132,16 +132,18 @@
                     right: 10px; 
                     padding: 7px 18px; 
                     border-radius: 999px; 
+                    width: fit-content; 
                     
-                    .icon {
-                        padding-right: 12px; 
-                        height: 18px;
+                    // .icon {
+                    //     padding-right: 12px; 
+                    //     height: 18px;
+                    //     width: 32px; 
 
-                        svg {
-                            height: 100%; 
-                            width: 100%;
-                        }
-                    } 
+                    //     svg {
+                    //         height: 100%; 
+                    //         width: 100%;
+                    //     }
+                    // } 
                     p {
                         margin: 0; 
                         color: white; 

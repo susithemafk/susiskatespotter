@@ -68,18 +68,20 @@ const EditPlace = () => {
         // delete images that were deleted from the place
         deletedImages?.map(image => {
             if (image) {
-                const path = decodeURIComponent(image.match(/\/o\/(.+)\?alt=/)[1])
-                console.log(path)
+                const match = image.match(/\/o\/(.+)\?alt=/)
+                const path = match ? decodeURIComponent(match[1]) : null
                 
-                const fileRef = storageRef(storage, path)
-                deleteObject(fileRef)
-                .then(() => {
-                    console.log('deleted from storage') 
-                })
-                .catch((error) => {
-                    console.log('error deleting from storage') 
-                    console.log(error)
-                })
+                if (path) {
+                    const fileRef = storageRef(storage, path)
+                    deleteObject(fileRef)
+                    .then(() => {
+                        console.log('deleted from storage') 
+                    })
+                    .catch((error) => {
+                        console.log('error deleting from storage') 
+                        console.log(error)
+                    })
+                }
             }
         })
     }  
@@ -178,7 +180,7 @@ const EditPlace = () => {
                     const uploadTask = uploadBytes(imageRef, image)
             
                     return uploadTask.then((snapshot) => {
-                        console.log('Upload successful:', snapshot)
+                        console.log('Upload successful')
                 
                         return getDownloadURL(snapshot.ref)
                             .then((downloadURL) => {
@@ -252,7 +254,22 @@ const EditPlace = () => {
                     })
             }
         }
-    }, [databaseDataSet]) 
+    }, [databaseDataSet])  
+
+    /**
+     * paste lat and lng from google maps
+     */
+    function handlePaste(event) {
+        event.preventDefault();
+        const clipboardData = event.clipboardData.getData("Text")
+        const values = clipboardData.split(",")
+        if (values.length === 2 && !isNaN(values[0]) && !isNaN(values[1])) {
+            setPlace(prevState => ({ ...prevState, lat: Number(values[0].trim()) }))
+            setPlace(prevState => ({ ...prevState, lng: Number(values[1].trim()) })) 
+        } else {
+            // handle invalid input
+        }
+    }
 
     const categories = [
         {value: 'skatepark',    label: 'Skatepark'},
@@ -288,7 +305,7 @@ const EditPlace = () => {
                     <div className = "col-lg-6 col-12 pe-lg-2">
                         <label>
                             Lat:
-                            <input required type="number" step = "any" name="lat" value={place.lat} onChange={handleChange} />
+                            <input required type="number" step = "any" name="lat" value={place.lat} onChange={handleChange} onPaste={handlePaste} />
                         </label>
                     </div>
                     <div className = "col-lg-6 col-12 ps-lg-2">
@@ -311,7 +328,7 @@ const EditPlace = () => {
                     <textarea required name="description" value={place.description} onChange={handleChange} />
                 </label> 
                 </div>
-                <div className = "row flex-wrap container-large mx-auto">
+                <div className = "row flex-wrap container-large justify-content-center mx-auto">
 
                         {/* Přidej obrázky, můžeš zvolit více souborů (max 3):  */}
                         {place.images ? place?.images.map((image, index) => {

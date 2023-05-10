@@ -1,7 +1,7 @@
 import styles from './DropdownMultiple.module.scss' 
 import { useState, useEffect } from 'react'
 
-const DropdownMultiple = ({ categories, setCategories, className }) => {
+const DropdownMultiple = ({ categories, setCategories, className, ...rest }) => {
 
     
     const [open, setOpen] = useState(false)
@@ -40,7 +40,7 @@ const DropdownMultiple = ({ categories, setCategories, className }) => {
     } 
     
     return (
-        <div className = {`${styles.dropdown} ${className}`}>
+        <div className = {`${styles.dropdown} ${className}`} {...rest}>
 
             <div className = {`${styles.clickOutside} ${open ? 'd-block' : 'd-none'}`} onClick = {handleOpen}></div>
 

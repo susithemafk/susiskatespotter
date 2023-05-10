@@ -42,18 +42,21 @@ const DeleteMySpot = ({ place }) => {
         const imagesToDelete = place.images 
         imagesToDelete?.map(image => {
             if (image) {
-                const path = decodeURIComponent(image.match(/\/o\/(.+)\?alt=/)[1])
-                console.log(path)
-                
-                const fileRef = storageRef(storage, path)
-                deleteObject(fileRef)
-                .then(() => {
-                    console.log('deleted from storage') 
-                })
-                .catch((error) => {
-                    console.log('error deleting from storage') 
-                    console.log(error)
-                })
+
+                const match = image.match(/\/o\/(.+)\?alt=/)
+                const path = match ? decodeURIComponent(match[1]) : null
+
+                if (path) {
+                    const fileRef = storageRef(storage, path)
+                    deleteObject(fileRef)
+                    .then(() => {
+                        console.log('deleted from storage') 
+                    })
+                    .catch((error) => {
+                        console.log('error deleting from storage') 
+                        console.log(error)
+                    })
+                }
             }
         })
 

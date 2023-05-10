@@ -1,7 +1,7 @@
 
 import { getAuth, signOut } from "firebase/auth"; 
 import { auth, db } from "../firebase"; 
-import { set } from "firebase/database";
+import { set, update } from "firebase/database";
 import { onValue, ref } from "firebase/database";
 import Button from "../components/Button"; 
 import { useState, useEffect } from "react"; 
@@ -9,6 +9,7 @@ import { updateEmail, updatePassword, deleteUser, reauthenticateWithCredential, 
 import { Link, useNavigate } from "react-router-dom"; 
 import Rating from "../components/Rating";  
 import DeleteComment from "../components/Skateparks/DeleteComment"; 
+import { remove } from "firebase/database";
 
 import findUserComments from '../functions/findUserComments'
 
@@ -79,6 +80,7 @@ const Account = () => {
             const auth = getAuth() 
             const user = Object.values(data?.users).find(user => user.email === auth.currentUser.email) 
             setCurrentUser(user)
+            // console.log(user)
         })
     }, [])
 
@@ -102,7 +104,7 @@ const Account = () => {
             updateEmail(auth.currentUser, newEmail)
             .then(() => {
                 console.log('successfully changed email, finding user in database...') 
-                findUser(oldEmail)
+                findUser(oldEmail) // upload changes to database
             })
             .catch((error) => {
                 alert('error changing email')
@@ -115,7 +117,17 @@ const Account = () => {
             console.log('error authenticating')
             console.log(error)
         }) 
+
     } 
+
+    /**
+     * checks if username is already taken
+     */
+    const checkUsernameAvailability = (username) => {
+        const user = Object.values(data?.users).find(user => user.username === username) 
+        if (user) return false 
+        else return true
+    }
 
     /**
      * edits username and posts to database, doesnt require authentication
@@ -127,18 +139,22 @@ const Account = () => {
             ...currentUser, 
             username: newUsername
         }
-        
-        set(ref(db, `/users/${currentUser.uuid}`), newUser)
-            .then(() => {
-                console.log('editing username successful')
-                setNewUsername('')
-                setEditingUsername(false)
-            })
-            .catch((error) => {
-                alert('error editing username, try later or leave us a message')
-                console.log('error editing username')
-                console.log(error)
-            })
+
+        if (checkUsernameAvailability(newUsername)) {
+            set(ref(db, `/users/${currentUser.uuid}`), newUser)
+                .then(() => {
+                    console.log('editing username successful')
+                    setNewUsername('')
+                    setEditingUsername(false)
+                })
+                .catch((error) => {
+                    alert('error editing username, try later or leave us a message')
+                    console.log('error editing username')
+                    console.log(error)
+                })
+        } else {
+            alert('Přezdívka je již použitá')
+        }
     }
 
     /**
@@ -211,7 +227,16 @@ const Account = () => {
                     alert('error deleting account')
                     console.log('error deleting account')
                     console.log(error) 
-                });
+                }) 
+
+                // removes user from database
+                remove(ref(db, `/users/${currentUser.uuid}`))
+                    .then(() => {
+                        console.log('removed from users database')
+                    })
+                    .catch((error) => {
+                        console.log(error)
+                })
             })
             .catch((error) => {
                 alert('error authenticating')
@@ -274,7 +299,7 @@ const Account = () => {
 
                         {!editingUsername ? 
                             <div className = "d-flex justify-content-between pt-3">
-                                <p>Přezdívka: {currentUser.username}</p>
+                                <p>Přezdívka: {currentUser?.username}</p>
                                 <button className = "text-underline " onClick = {() => setEditingUsername(true)}>změnit</button>
                             </div>
                                 
@@ -290,7 +315,7 @@ const Account = () => {
                         }
                         
                             <div className = "d-flex justify-content-between mt-2 pt-1">
-                                <p>Email: {currentUser.email}</p>
+                                <p>Email: {currentUser?.email}</p>
                                 <button className = {`text-underline ${editingEmail ? 'd-none' : ''}`} onClick = {() => setEditingEmail(true)}>změnit</button>
                             </div>
                                 
@@ -334,7 +359,21 @@ const Account = () => {
 
                 <h1 className = "mt-5 fs-2">Moje komentáře</h1>
 
-                {findUserComments(data, currentUser.uuid) ? Object.values(findUserComments(data, currentUser.uuid)).map((comment, index) => {
+                {findUserComments(data, currentUser?.uuid) ? 
+                (Object.values(findUserComments(data, currentUser?.uuid)).length < 1 ? 
+                    <div>
+                        <p className="mt-2 fs-4 fw-400">Zatím jste nepřidali žádné komentáře</p>
+                        <Button variant = "primary" className = "mt-2 mb-5 fs-5" >
+                            <Link to = "/all-places">Všechny spoty</Link>
+                        </Button> 
+                    </div>
+                        
+                    : '') 
+                : ''}
+
+
+
+                {findUserComments(data, currentUser?.uuid) ? Object.values(findUserComments(data, currentUser?.uuid)).map((comment, index) => {
                     const skateparkMatchingComment = findSkateparkByCommentID(comment)
                     return (
                         <div className = {`${styles.comment} row flex-wrap my-5`} key = {index}>
@@ -345,12 +384,12 @@ const Account = () => {
                                         <path id="Icon_awesome-user-alt" data-name="Icon awesome-user-alt" d="M18,20.25A10.125,10.125,0,1,0,7.875,10.125,10.128,10.128,0,0,0,18,20.25Zm9,2.25H23.126a12.24,12.24,0,0,1-10.252,0H9a9,9,0,0,0-9,9v1.125A3.376,3.376,0,0,0,3.375,36h29.25A3.376,3.376,0,0,0,36,32.625V31.5A9,9,0,0,0,27,22.5Z"/>
                                     </svg>
                                 </div>
-                                <p>{currentUser.username}</p>
+                                <p>{currentUser?.username}</p>
                                 <Rating rating = {[comment.rating]} showCount = {false} width = {100} black = {true} />
                             </div>
 
                             <div className = {`${styles.right} ps-lg-4 col-12 col-lg-10 mt-lg-0 mt-3`}>
-                                <p className = "fw-600">{comment.text}</p>
+                                <p className = "fw-600">{comment?.text}</p>
                             </div>
 
                             <div className = "fw-600 w-100 d-flex justify-content-end mb-2">

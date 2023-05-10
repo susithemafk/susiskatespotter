@@ -58,17 +58,17 @@ const DeleteComment = ({ object, comment, children }) => {
                         console.log(error)
                     })
             }
-            remove(ref(db, `/users/${currentUser.uuid}/comments/${comment.commentid}`))
-                .then(() => {
-                    console.log('removed from user database')
-                    setSure(false)
-                    setLoading(false)
+            // remove(ref(db, `/users/${currentUser.uuid}/comments/${comment.commentid}`))
+            //     .then(() => {
+            //         console.log('removed from user database')
+            //         setSure(false)
+            //         setLoading(false)
                         
-                })
-                .catch((error) => {
-                    alert('error, try again later or leave us a message')
-                    console.log(error)
-                })
+            //     })
+            //     .catch((error) => {
+            //         alert('error, try again later or leave us a message')
+            //         console.log(error)
+            //     })
         }
     } 
 

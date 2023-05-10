@@ -16,7 +16,7 @@
 
         @media (max-width: $lg) {
             // max-height: calc(40vh - 42.5px);
-            height: 45%;
+            // height: 45%;
         }
     }
 
@@ -29,7 +29,8 @@
         @media (max-width: $lg) {
             // min-height: calc(60vh - 42.5px); 
             min-height: 350px;
-            height: 55%;
+            // height: 55%;
+            height: 100%;
         }
 
         .categories {
@@ -57,6 +58,8 @@
         & * {
             color: white; 
         } 
+
+        &:hover {cursor: pointer; }
     
         .content {
             min-height: 200px;
@@ -86,10 +89,10 @@
         }
     
         &.active { 
-            min-height: 300px;
+            min-height: 250px;
     
             .content {
-                min-height: 300px;
+                min-height: 250px;
     
                 .details {
                     bottom: 60px;

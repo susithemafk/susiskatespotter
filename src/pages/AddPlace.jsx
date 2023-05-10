@@ -15,6 +15,7 @@ import { Link } from 'react-router-dom'
 import Select from 'react-select';
 
 const AddPlace = () => {
+    useEffect(() => {window.scrollTo(0, 0)}, [])
     const defaultSkatepark = {
         uuid: '', 
         name: '', 
@@ -66,6 +67,9 @@ const AddPlace = () => {
         setSubmitted(false)
     } 
 
+    /**
+     * paste lat and lng from google maps
+     */
     function handlePaste(event) {
         event.preventDefault();
         const clipboardData = event.clipboardData.getData("Text")
@@ -292,9 +296,9 @@ const AddPlace = () => {
             </form>
 
             <div className = "help pb-4">
-                <h4 className = "text-center mt-5 mb-2 fs-2 pt-4 fw-800">Nevíš si rady?</h4>
+                <h4 className = "text-center mt-5 mb-2 fs-2 pt-4 fw-800 container-small mx-auto">Jak správně přidat spot a jeho souřadnice?</h4>
                 <Link to = "/how-to-add">
-                    <Button variant = "primary" className = "d-block mx-auto">jak přidat spot</Button>
+                    <Button variant = "primary" className = "d-block mx-auto">Mrkni sem</Button>
                 </Link>
             </div>
         </div>
