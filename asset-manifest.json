@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/susiskatespotter/static/css/main.7458827e.css",
-    "main.js": "/susiskatespotter/static/js/main.35e49005.js",
+    "main.js": "/susiskatespotter/static/js/main.41a93b33.js",
     "static/media/skatevideo1.mp4": "/susiskatespotter/static/media/skatevideo1.1f45413dcdde27d007bf.mp4",
     "static/media/hero.jpg": "/susiskatespotter/static/media/hero.f8d20e1c6d215e93e57e.jpg",
     "static/media/help_map.jpg": "/susiskatespotter/static/media/help_map.ec52a5d0a8f462cb97e6.jpg",
@@ -31,10 +31,10 @@
     "static/media/brno_logo.svg": "/susiskatespotter/static/media/brno_logo.22252ab34aa2370fa355146b33521cd2.svg",
     "index.html": "/susiskatespotter/index.html",
     "main.7458827e.css.map": "/susiskatespotter/static/css/main.7458827e.css.map",
-    "main.35e49005.js.map": "/susiskatespotter/static/js/main.35e49005.js.map"
+    "main.41a93b33.js.map": "/susiskatespotter/static/js/main.41a93b33.js.map"
   },
   "entrypoints": [
     "static/css/main.7458827e.css",
-    "static/js/main.35e49005.js"
+    "static/js/main.41a93b33.js"
   ]
 }
