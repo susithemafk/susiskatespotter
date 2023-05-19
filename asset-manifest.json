@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/susiskatespotter/static/css/main.ce3c6751.css",
-    "main.js": "/susiskatespotter/static/js/main.e86c9e72.js",
+    "main.css": "/susiskatespotter/static/css/main.8391511b.css",
+    "main.js": "/susiskatespotter/static/js/main.07fc1cb9.js",
     "static/media/skatevideo1.mp4": "/susiskatespotter/static/media/skatevideo1.1f45413dcdde27d007bf.mp4",
     "static/media/hero.jpg": "/susiskatespotter/static/media/hero.f8d20e1c6d215e93e57e.jpg",
     "static/media/help_map.jpg": "/susiskatespotter/static/media/help_map.ec52a5d0a8f462cb97e6.jpg",
@@ -30,11 +30,11 @@
     "static/media/olomouc_logo.svg": "/susiskatespotter/static/media/olomouc_logo.39156dbaf5321280a0b97748c5a3f271.svg",
     "static/media/brno_logo.svg": "/susiskatespotter/static/media/brno_logo.22252ab34aa2370fa355146b33521cd2.svg",
     "index.html": "/susiskatespotter/index.html",
-    "main.ce3c6751.css.map": "/susiskatespotter/static/css/main.ce3c6751.css.map",
-    "main.e86c9e72.js.map": "/susiskatespotter/static/js/main.e86c9e72.js.map"
+    "main.8391511b.css.map": "/susiskatespotter/static/css/main.8391511b.css.map",
+    "main.07fc1cb9.js.map": "/susiskatespotter/static/js/main.07fc1cb9.js.map"
   },
   "entrypoints": [
-    "static/css/main.ce3c6751.css",
-    "static/js/main.e86c9e72.js"
+    "static/css/main.8391511b.css",
+    "static/js/main.07fc1cb9.js"
   ]
 }
