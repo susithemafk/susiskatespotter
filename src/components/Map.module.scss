@@ -1,0 +1,45 @@
+@import '../variables.scss'; 
+
+.mapWrapper {
+    position: relative; 
+    height: 100%; 
+
+    .categories {
+        position: absolute; 
+        top: 0;
+        left: 0;  
+        z-index: 2; 
+    }
+}
+
+#map {
+    height: 100%;  
+
+    .infoWindow {
+        position: relative;
+        height: 150px;  
+        max-width: 375px; 
+
+        @media (min-width: $lg) {
+            height: 225px; 
+        }
+
+        .overlay {
+            position: absolute; 
+            height: 100%; 
+            width: 100%; 
+            background: linear-gradient(0deg, rgba(0,0,0,0.90) 18%, rgba(0,0,0,0) 51%); 
+        }
+
+        
+        img {
+            max-width: 100%;
+            min-height: 100%;
+        } 
+
+        .title {
+            position: absolute; 
+            bottom: 0; 
+        }
+    }
+}

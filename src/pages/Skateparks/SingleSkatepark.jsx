@@ -140,7 +140,8 @@ const SingleSkatepark = () => {
                                         <span className = {`fw-600`}>Souřadnice: </span>
                                         {copied ? <p>Zkopírováno do schránky</p> : <p className = {`${styles.copy}`} onClick = {() => copyValue(skatepark.lat, skatepark.lng)}>{skatepark.lat}, {skatepark.lng}</p>}
                                     </div>
-                                    <Link to = {`/find-place?spot=${skatepark.uuid}`}><Button variant = "primary" className = "mt-3 mb-2 fw-800 me-3 d-block">zobrazit na mapě</Button></Link>
+                                    {/* <Link to = {`/find-place?spot=${skatepark.uuid}`}><Button variant = "primary" className = "mt-3 mb-2 fw-800 me-3 d-block">zobrazit na mapě</Button></Link> */}
+                                    <Link to = {`/spots-map?spot=${skatepark.uuid}`}><Button variant = "primary" className = "mt-3 mb-2 fw-800 me-3 d-block">zobrazit na mapě</Button></Link>
                                     <Link to = {`https://www.google.com/maps/search/?api=1&query=${skatepark.lat}%2C${skatepark.lng}`} target = "_blank">
                                         <Button variant = "secondary" className = {`${styles.detailButton} mb-2 fs-5 fw-800 mt-1 montserrat`}>Google Mapy</Button>
                                     </Link>

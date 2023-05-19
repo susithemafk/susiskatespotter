@@ -18,7 +18,8 @@ import { GlobalAuthorizedContext } from './context/GlobalAuthorizedContext'
 import AllPlaces from './pages/AllPlaces'
 import SingleSpot from './pages/Spots/SingleSpot'
 import EditPlace from './pages/EditPlace'
-import HowToAddSpot from './pages/AddPlace/HowToAddSpot'
+import HowToAddSpot from './pages/AddPlace/HowToAddSpot' 
+import SpotsMap from './pages/SpotsMap'
 
 function App() {
 
@@ -47,6 +48,8 @@ function App() {
 						<Route path = "/find-place" element = {<FindPlace />} />
 						<Route path = "/all-places" element = {<AllPlaces />} />
 						<Route path = "/how-to-add" element = {<HowToAddSpot />} />
+						
+						<Route path = "/spots-map" element = {<SpotsMap />} />
 
 						<Route element = {<ProtectedRoutes />}>
 

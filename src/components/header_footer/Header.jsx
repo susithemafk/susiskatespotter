@@ -55,7 +55,8 @@ const Header = () => {
                                 <h4>Skateparky</h4>
                             </div>
                         </Link>
-                        <Link to = "/find-place" className = "my-2">
+                        {/* <Link to = "/find-place" className = "my-2"> */}
+                        <Link to = "/spots-map" className = "my-2">
                             <div className = "d-flex align-items-center">
                                 <img src = {map} height = {50} alt = "map icon" className = "me-3" />
                                 <h4>Mapa</h4>
@@ -102,7 +103,8 @@ const Header = () => {
                 <div className = {`${styles.links} ms-auto d-md-flex d-none`}>
                     <Link to = "/all-places?category=skatepark"  className = "my-auto">skateparky</Link>
                     <Link to = "/all-places?category=spots" className = "my-auto">street spoty</Link>
-                    <Link to = "/find-place" className = "my-auto">mapa</Link>
+                    {/* <Link to = "/find-place" className = "my-auto">mapa</Link> */}
+                    <Link to = "/spots-map" className = "my-auto">mapa</Link>
 
                     {authorized ? 
                         <div className = {`${styles.account} `}>

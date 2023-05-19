@@ -50,6 +50,7 @@ button {
 hr {
   display: block;
   height: 1px;
+  border: 0;
   border-top: 1px solid #1b1b1b;
   margin: 0 auto;
 }
@@ -2666,6 +2667,31 @@ textarea {
 
 .montserrat {
   font-family: Montserrat, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen";
+}
+
+.gm-style-iw-c[role=dialog] {
+  padding: 0;
+  margin: 0;
+}
+.gm-style-iw-c[role=dialog] .gm-style-iw-d {
+  padding: 0;
+  margin: 0;
+  overflow: hidden !important;
+}
+.gm-style-iw-c[role=dialog] .gm-ui-hover-effect {
+  height: 40px !important;
+  width: 40px !important;
+  margin: 10px 10px 0 0 !important;
+  opacity: 1 !important;
+}
+.gm-style-iw-c[role=dialog] .gm-ui-hover-effect span {
+  margin: 0 !important;
+  height: 40px !important;
+  width: 40px !important;
+}
+
+.gm-style-iw-tc::after {
+  background-color: #4c4c4c !important;
 }
 
 /*# sourceMappingURL=index.css.map */
