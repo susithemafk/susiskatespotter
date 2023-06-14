@@ -1,0 +1,196 @@
+@import '../../variables.scss'; 
+@import '../../index.scss'; 
+
+
+.SingleSpot {
+
+
+    .carousel {
+        height: 300px; 
+        // border-radius: 20px;
+        clip-path: inset(0px round 20px);
+    }
+
+    .details {
+        .detail {
+            display: flex; 
+            align-items: center; 
+            margin: 1rem 0;
+
+            &:first-child {
+                margin-top: 0; 
+            }
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            img {
+                height: 50px; 
+                margin-right: 1.5rem; 
+            }
+
+            .text {
+                margin: 0; 
+                font-weight: bold; 
+                @extend .fs-4; 
+            }
+
+            &.coords {
+                .copy {
+                    position: relative;
+        
+                    &::after {
+                        content: 'kliknutím zkopíruješ'; 
+                        position: absolute; 
+                        top: -30px; 
+                        right: -0px; 
+                        opacity: 0; 
+                        z-index: 2;
+                        transition: opacity 0.15s;  
+                        background-color: rgba(0, 0, 0, 0.048); 
+                        padding: 5px 10px; 
+                        width: max-content;
+                    } 
+                    &:hover::after {
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+    }
+
+    .discussion {
+        .comment {
+            padding: 0.5rem 1.2rem; 
+            border-radius: 10px; 
+            border: 1px solid black; 
+            max-width: 600px; 
+            cursor: pointer;
+
+            .right {
+                .text {
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2; 
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                }
+            }
+        }
+    }
+    .boxes {
+        .boxWrapper {
+            @media (min-width: 1100px) {
+                flex: 0 0 50%;
+                max-width: 50%;
+            }
+            
+            @media (min-width: 1900px) {
+                max-width: 345px;
+                flex: 0 0 33%;
+            }
+            
+            flex: 0 0 100%;
+            max-width: 100%;
+
+
+
+            padding: 1.25rem; 
+
+            .box {
+                box-shadow: 10px 10px 0 $red; 
+                background-color: $lightgray; 
+                border: 0.1px solid gray; 
+                cursor: pointer;
+
+                .header {
+                    position: relative; 
+                    height: 175px; 
+                    overflow: hidden;
+
+                    img {
+                        min-width: 100%; 
+                        height: 100%; 
+                        width: 100%;
+                        object-fit: cover; 
+                        object-position: 100% 50%; 
+                    } 
+                    .overlay {
+                        position: absolute; 
+                        inset: 0;
+                        height: 100%; 
+                        width: 100%; 
+                        z-index: 2; 
+                        background-color: rgba(0, 0, 0, 0.3); 
+                        transition: background-color 0.15s; 
+
+                        &::after {
+                            content: "VÍCE"; 
+                            position: absolute; 
+                            z-index: 2; 
+                            opacity: 0; 
+                            font-size: 2rem; 
+                            font-weight: bold; 
+                            color: white; 
+                            top: 50%; 
+                            left: 50%; 
+                            transform: translate(-50%, -50%); 
+                            transition: opacity 0.15s;
+                        }
+                    } 
+                    .categoryLabel {
+                        position: absolute; 
+                        z-index: 3;
+                        top: 10px; 
+                        right: 10px; 
+                        padding: 7px 18px; 
+                        border-radius: 999px; 
+                        width: fit-content; 
+                        
+                        // .icon {
+                        //     padding-right: 12px; 
+                        //     height: 18px;
+                        //     width: 32px; 
+
+                        //     svg {
+                        //         height: 100%; 
+                        //         width: 100%;
+                        //     }
+                        // } 
+                        p {
+                            margin: 0; 
+                            color: white; 
+                            font-weight: 500;
+                        }
+                    } 
+                }
+
+                .content {
+                    font-weight: 500; 
+
+                    .title {
+                        text-align: center; 
+                        font-weight: bold;
+                    }
+                    .titles {
+                        text-align: end;
+                    } 
+                    .values {
+                        border-left: 1px solid black;
+                    }
+
+                }
+            
+                &:hover {
+                    .overlay {
+                        background-color: rgba(0, 0, 0, 0.7); 
+
+                        &::after {
+                            opacity: 1;
+                        }
+                    
+                    }
+                }
+            }
+        }
+    }
+}

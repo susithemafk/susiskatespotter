@@ -80,11 +80,18 @@ textarea {
 }
 // map buttons 
 .gmnoprint[role="menubar"], .gm-fullscreen-control {
-    top: 80px !important;
+    // top: 80px !important;
 }
 .gmnoprint[role="menubar"] {
     @media (max-width: $sm) {
-        display: none !important;
+        // display: none !important;
+
+        bottom: 0;
+        margin-top: auto !important;
+        display: flx;
+        display: flex;
+        align-items: end; 
+        pointer-events: none;
     }
 }
 
@@ -97,6 +104,7 @@ textarea {
 .gm-style-iw-c[role="dialog"] {
     padding: 0; 
     margin: 0; 
+    max-width: unset !important;
 
     // some parrent that had paddings
     .gm-style-iw-d {
@@ -107,15 +115,20 @@ textarea {
 
     // close button
     .gm-ui-hover-effect {
+        display: none !important;
         height: 40px !important; 
         width: 40px !important;
         margin: 10px 10px 0 0 !important; 
         opacity: 1 !important; 
+        background-color: black !important; 
+        border-radius: 999px; 
         
         span {
             margin: 0 !important;
             height: 40px !important; 
-            width: 40px !important;
+            width: 40px !important; 
+            background-color: white; 
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
         }
     }
 

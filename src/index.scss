@@ -144,6 +144,7 @@ $cols: (
 .fs-3 {font-size: 1.7rem}
 .fs-4 {font-size: 1.4rem}
 .fs-5 {font-size: 1.1rem}
+.fs-55 {font-size: 0.9rem}
 .fs-6 {font-size: 0.75rem} 
 
 @media (max-width: $md) {
@@ -159,7 +160,15 @@ $cols: (
     .fs-3 {font-size: 1.2rem}
     .fs-4 {font-size: 1rem}
     .fs-5 {font-size: 0.9rem}
+    .fs-55 {font-size: 0.8rem}
     .fs-6 {font-size: 0.75rem} 
+}
+
+.pointer {
+    cursor: pointer; 
+}
+.border-right {
+    border-right: 1px solid black; 
 }
 
 // containers
@@ -406,6 +415,9 @@ $displayValues: (
 .text-secondary {
     color: $secondary !important;
 }
+.text-gray {
+    color: #999999 !important; 
+}
 .text-dark, .text-dark * {
     color: $darkgray !important;
 }
@@ -425,6 +437,18 @@ $displayValues: (
     position: absolute !important;  
 }
 
+.top-0 {
+    top: 0 !important;  
+}
+.bottom-0 {
+    bottom: 0 !important;  
+}
+.left-0 {
+    left: 0 !important;  
+}
+.right-0 {
+    right: 0 !important;  
+}
 // cols without media queries
 @each $key, $value in $cols {
     .col-#{$key} {

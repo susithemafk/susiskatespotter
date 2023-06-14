@@ -20,6 +20,7 @@ import SingleSpot from './pages/Spots/SingleSpot'
 import EditPlace from './pages/EditPlace'
 import HowToAddSpot from './pages/AddPlace/HowToAddSpot' 
 import SpotsMap from './pages/SpotsMap'
+import Map2 from './pages/Map2'
 
 function App() {
 
@@ -61,6 +62,8 @@ function App() {
 
 						<Route path = "/skateparks/:skateparkID" element = {<SingleSkatepark />} />
 						<Route path = "/spots/:spotID" element = {<SingleSpot />} />
+
+						<Route path = "/map2" element = {<Map2 />} />
 					</Route>
 
 				</Routes>

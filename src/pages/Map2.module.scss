@@ -1,0 +1,37 @@
+
+.map2 {
+    overflow: hidden; 
+    display: flex;
+
+    .left, .right {
+        flex: 0 0 100%; 
+        max-width: 100%;
+        
+        @media (min-width: 1100px) {
+            flex: 0 0 50%; 
+            max-width: 50%;
+        }
+        @media (max-width: 1100px) {
+            position: relative; 
+            right: 100%;
+        }
+    }
+    
+    &.mobileactive {
+        .left, .right {
+            @media (max-width: 1100px) {
+                position: relative; 
+                right: 0%;
+            }
+        }
+    }
+
+    .left {
+        overflow-y: scroll; 
+        scrollbar-width: none;
+        &::-webkit-scrollbar {
+            width: 0px;
+            background: transparent; /* make scrollbar transparent */
+        }
+    }
+}

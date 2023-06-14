@@ -84,7 +84,7 @@ const Map = ({ skateparks, selectedSkatepark, setSelectedSkatepark }) => {
     // onClick on skatepark
     useEffect(() => {
         if (selectedSkatepark?.lat && selectedSkatepark?.lng) {
-            panTo(selectedSkatepark?.lat - 0.002, selectedSkatepark?.lng)
+            panTo(selectedSkatepark?.lat - 0.007, selectedSkatepark?.lng)
 
             // scrolls in list to selected skatepark
             // itemRefs?.current[filteredSkateparks.indexOf(selectedSkatepark)]?.scrollIntoView({

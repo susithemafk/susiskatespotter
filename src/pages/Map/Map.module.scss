@@ -1,0 +1,91 @@
+@import '../../variables.scss';
+@import '../../index.scss';
+
+
+.mapWrapper {
+    min-height: 400px; 
+    height: 100%; 
+    width: 100%;  
+    position: relative; 
+
+    @media (max-width: $lg) {
+        // min-height: calc(60vh - 42.5px); 
+        min-height: 350px;
+        // height: 55%;
+        height: 100%;
+    }
+
+    .categories {
+        position: absolute; 
+        top: 0;
+        left: 0;  
+        z-index: 2; 
+    }
+
+    .map {
+        height: 100%; 
+        width: 100%;
+    } 
+}
+
+.infowindow {
+    height: 180px; 
+    width: 320px;
+    position: relative; 
+
+    &::after {
+        content: ''; 
+        position: absolute;
+        height: 100%; 
+        width: 100%;
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 12%, rgba(0, 0, 0, 0) 40%); 
+    }
+
+
+    img {
+        position: absolute;
+        height: 100%; 
+        min-width: 100%; 
+        width: 100%;
+        object-fit: cover; 
+        object-position: 50% 50%; 
+        background-color: beige; 
+        inset: 0; 
+        transition: all 0.5s; 
+
+       
+    }
+
+    .textWrapper {
+        position: absolute; 
+        padding: 0.75rem 1.3rem; 
+        bottom: 0; 
+        left: 0; 
+        z-index: 1;
+        
+        .text {
+            color: white; 
+            @extend .fs-3; 
+            @extend .montserrat; 
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    } 
+
+    .buttonWrapper {
+        @extend .montserrat; 
+        @extend .fs-5;
+        position: absolute; 
+        z-index: 1; 
+        top: 0; 
+        right: 0; 
+        padding: 0.5rem; 
+
+        button {
+            padding: 8px 32px !important; 
+            min-width: 0 !important;
+        }
+    }
+}

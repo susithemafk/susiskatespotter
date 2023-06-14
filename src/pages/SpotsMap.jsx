@@ -16,6 +16,7 @@ import styles from './SpotsMap.module.scss'
 
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom"
 import Rating from "../components/Rating"
+import Draggable from "react-draggable"
     
 const SpotsMap = () => {
 
@@ -68,40 +69,58 @@ const SpotsMap = () => {
 
 
     // Drag functionality
-    const [divPosition, setDivPosition] = useState({ y: 450 }) 
-    const [divHeight, setDivHeight] = useState(55) // change height of div if on top
+    const pageHeight = window.innerHeight - 85 // - header height
+    const [divPosition, setDivPosition] = useState({ x: 0, y: pageHeight * 0.95 }) 
+    const draggableRef = useRef(null)
 
     // active dragging function
-    const pageHeight = window.innerHeight - 85 // - header height
-    const handleDivDrag = (event) => {
-        setDivPosition({ y: event.touches[0] - 85 })
-    }
+    const handleDragEnd = (e, ui) => {
+        const { y } = ui
+        console.log(pageHeight, y) 
 
-    // drag end function
-    const handleDragEnd = (event) => {
-        const { clientY } = event.changedTouches[0]
+        const isBottom = divPosition.y === pageHeight * 0.95
+        const isTop = divPosition.y === pageHeight * 0.1
+        const isCenter = divPosition.y === pageHeight * 0.45 
 
-        if (clientY < pageHeight * 0.4) { // 30% of page height, move it to top, also skatepark has to be active
-            if (selectedSkatepark) {
-                setDivPosition({ y: 40 })
-                setDivHeight(100)
+        if (isBottom) {
+            if (y < pageHeight * 0.9) {
+                setDivPosition({ x:0, y: pageHeight * 0.45 }) // center position
             }
-        } else if (clientY > pageHeight - 100) { // 100px from bottom, move it to bottom
-            setDivPosition({ y: '95%' }) 
-            setDivHeight(55)
-        } else {
-            if (selectedSkatepark) {
-                setDivPosition({ y: '45%' }) // center position, also skatepark has to be active
-                setDivHeight(55)
+        } 
+        if (isCenter) {
+            if (y < pageHeight * 0.45) {
+                setDivPosition({ x:0, y: pageHeight * 0.1 }) // top position
+            } else if (y > pageHeight * 0.55) {
+                setDivPosition({ x:0, y: pageHeight * 0.95 }) // bottom position
+            }
+        } 
+        if (isTop) {
+            if (y > pageHeight * 0.25) {
+                setDivPosition({ x:0, y: pageHeight * 0.45 }) // center position
             }
         }
+
+        // if (y < pageHeight * 0.2) { // 30% of page height, move it to top, also skatepark has to be active
+        //     console.log('move top')
+        //     if (selectedSkatepark) {
+        //         setDivPosition({ x:0, y: 40 })
+        //     }
+        // } else if (y > pageHeight * 0.65) { // 100px from bottom, move it to bottom
+        //     console.log('move bottom')
+        //     setDivPosition({ x:0, y: pageHeight * 0.95 }) 
+        // } else {
+        //     console.log('move center')
+        //     if (selectedSkatepark) {
+        //         setDivPosition({ x:0, y: pageHeight * 0.45 }) // center position, also skatepark has to be active
+        //     }
+        // }
     }
 
     useEffect(() => {
         if (selectedSkatepark) {
-            setDivPosition({ y: '45%' })
+            setDivPosition({ x:0, y: pageHeight * 0.45 }) // center position, also skatepark has to be active
         } else {
-            setDivPosition({ y: '95%' })
+            setDivPosition({ x:0, y: pageHeight * 0.95 }) // bottom position
         }
     }, [selectedSkatepark])
 
@@ -111,9 +130,48 @@ const SpotsMap = () => {
 
             <div ref = {wrapperRef} className = {`${styles.wrapper}`}>
                 <Map skateparks = {skateparks} selectedSkatepark = {selectedSkatepark} setSelectedSkatepark = {setSelectedSkatepark} />
+
+                <Draggable
+                    axis="y" 
+                    onStop = {handleDragEnd}
+                    // bounds="parent" 
+                    disabled = {!selectedSkatepark}
+                    position={divPosition}
+                    nodeRef={draggableRef}
+                >
+                    <div className = {`${styles.detailWindowWrapper} pt-4 top-0`}>
+                        <div className = {styles.detailWindow}>
+                            
+                            <div  ref={draggableRef} className = {styles.dragger} >
+                                <hr />
+                            </div>
+                                
+                            <h3 className = "px-4 fs-1 pt-2">{selectedSkatepark?.name}</h3>
+                            <div className="px-4">
+                                <Rating rating = {selectedSkatepark?.comments ? Object.values(selectedSkatepark.comments).map(comment => comment.rating) : []} width = {150} black = {true} />
+                                <p className = "fs-3 my-2">{selectedSkatepark?.address} - {selectedSkatepark?.city}</p>
+                                <Link to = {`/${selectedSkatepark?.category === 'skatepark' ? 'skateparks' : 'spots'}/${selectedSkatepark?.uuid}`}>
+                                    <Button variant = "primary" className = {`${styles.detailButton} mb-2 me-3 px-4 fs-5 fw-800 mt-1  montserrat`}>Detail</Button>
+                                </Link>
+                                <Link to = {`https://www.google.com/maps/search/?api=1&query=${selectedSkatepark?.lat}%2C${selectedSkatepark?.lng}`} target = "_blank">
+                                    <Button variant = "primary" className = {`${styles.detailButton} mb-3 fs-5 px-4 fw-800 mt-1 montserrat`}>Google Mapy</Button>
+                                </Link>
+                            </div>
+                            <div className = {`${styles.imgSlider} mb-4`}>
+                                {selectedSkatepark?.images.map((image, index) => (
+                                    <div className = {`${styles.imgWrapper}`}>
+                                        <img key = {index} src = {image} alt = "" />
+                                    </div>
+                                ))}
+                            </div>
+
+                        </div>
+                    </div>
+                </Draggable>
             </div>
 
-            <div className = {`${styles.detailWindowWrapper} ${selectedSkatepark ? '' : styles.hidden} p-4`} style={{
+            
+            {/* <div className = {`${styles.detailWindowWrapper} ${selectedSkatepark ? '' : styles.hidden} p-4`} style={{
                     position: 'absolute',
                     top: divPosition.y, 
                     height: divHeight + '%', 
@@ -141,7 +199,7 @@ const SpotsMap = () => {
                         ))}
                     </div>
                 </div>
-            </div>
+            </div> */}
 
         </div>
 
