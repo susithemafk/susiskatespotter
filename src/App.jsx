@@ -50,7 +50,7 @@ function App() {
 						<Route path = "/all-places" element = {<AllPlaces />} />
 						<Route path = "/how-to-add" element = {<HowToAddSpot />} />
 						
-						<Route path = "/spots-map" element = {<SpotsMap />} />
+						{/* <Route path = "/spots-map" element = {<SpotsMap />} /> */}
 
 						<Route element = {<ProtectedRoutes />}>
 
@@ -63,7 +63,7 @@ function App() {
 						<Route path = "/skateparks/:skateparkID" element = {<SingleSkatepark />} />
 						<Route path = "/spots/:spotID" element = {<SingleSpot />} />
 
-						<Route path = "/map2" element = {<Map2 />} />
+						<Route path = "/spots-map" element = {<Map2 />} />
 					</Route>
 
 				</Routes>

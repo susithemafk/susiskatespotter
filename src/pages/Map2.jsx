@@ -20,9 +20,15 @@ const Map2 = () => {
     const setHeightsForSafari = () => {
         const pageHeight = window.innerHeight - 85 // - header height
 
-        if (wrapperRef.current) {
-            wrapperRef.current.style.height = `${pageHeight}px`
+        const calculateSafariBrowserHeight = () => {
+            const urlBarHeight = window.innerHeight - document.documentElement.clientHeight
+            const safariBrowserHeight = window.innerHeight - urlBarHeight - 85
+
+            if (wrapperRef.current) {
+                wrapperRef.current.style.height = `${safariBrowserHeight}px`
+            }
         }
+        calculateSafariBrowserHeight()
     } 
     useEffect(() => {
         setHeightsForSafari()
@@ -110,7 +116,6 @@ const Map2 = () => {
      * if active, adds class to main wrapper map2 and moves the whole content so that on mobile you see details about spot or list of spots
      */
     const [mobilePanelSwitch, setMobilePanelSwitch] = useState(false)
-    useEffect(() => console.log(mobilePanelSwitch), [mobilePanelSwitch])
 
     return (
         <div ref = {wrapperRef} className = {`${styles.map2} ${mobilePanelSwitch ? styles.mobileactive : ''}`} >

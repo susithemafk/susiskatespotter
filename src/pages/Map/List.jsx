@@ -7,6 +7,7 @@ import Button from '../../components/Button'
 import DropdownMultiple from '../../components/DropdownMultiple'
 import DropdownSingle from '../../components/DropdownSingle'
 import { Link } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
 
 
@@ -24,6 +25,9 @@ const MapList = (props) => {
         setSelectedSpot, 
     } = props 
 
+    /**
+     * Sort
+     */
     const sortSpots = (temp) => {
         const activeValue = sortByOptions.find(option => option.active === true).value 
 
@@ -45,6 +49,39 @@ const MapList = (props) => {
         // }  
         return temp 
     } 
+
+    /**
+     * if has params in url, set active category
+     */
+    const location = useLocation()
+    useEffect(() => {
+        const queryParams = new URLSearchParams(location.search)
+        const paramCategory = queryParams.get('category')
+        const tempCategories = [...categories]
+
+        // if has paramCategory, then set it to it
+        if (paramCategory) {
+            tempCategories.map(category => {
+                if (category.name === paramCategory) {
+                    category.active = true
+                } else {
+                    category.active = false
+                }
+            })
+        }
+        // if param === spots, set spots to active, skateparks to inactive
+        if (paramCategory === 'spots') {
+            tempCategories.map((category) => {
+                if (category.name === 'skatepark') {
+                    category.active = false
+                } else {
+                    category.active = true
+                }
+            })
+        }
+        setCategories(tempCategories)
+
+    }, [location])
 
     /**
      * when categories change, filtered spots change

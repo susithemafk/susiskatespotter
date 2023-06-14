@@ -43,21 +43,20 @@ const Header = () => {
                     <ul className = "d-flex flex-column align-items-center fw-600 fs-2 mx-5" onClick = {toggleMenu}>
                         
                         
-                        <Link to = "/all-places?category=spots" className = "my-2">
+                        <Link to = "/spots-map?category=spots" className = "my-2">
                             <div className = "d-flex align-items-center">
                                 <img src = {rail} height = {50} alt = "rail icon" className = "me-3" />
                                 <h4>Street</h4>
                             </div>
                         </Link>
-                        <Link to = "/all-places?category=skatepark" className = "my-2">
+                        <Link to = "/spots-map?category=skatepark" className = "my-2">
                             <div className = "d-flex align-items-center">
                                 <img src = {skateboard} height = {50} alt = "skateboard icon" className = "me-3" />
                                 <h4>Skateparky</h4>
                             </div>
                         </Link>
                         {/* <Link to = "/find-place" className = "my-2"> */}
-                        {/* <Link to = "/spots-map" className = "my-2"> */}
-                        <Link to = "/map2" className = "my-2">
+                        <Link to = "/spots-map" className = "my-2">
                             <div className = "d-flex align-items-center">
                                 <img src = {map} height = {50} alt = "map icon" className = "me-3" />
                                 <h4>Mapa</h4>
@@ -102,11 +101,11 @@ const Header = () => {
 
                 {/* NAV LINKS */}
                 <div className = {`${styles.links} ms-auto d-md-flex d-none`}>
-                    <Link to = "/all-places?category=skatepark"  className = "my-auto">skateparky</Link>
-                    <Link to = "/all-places?category=spots" className = "my-auto">street spoty</Link>
+                    <Link to = "/spots-map?category=skatepark"  className = "my-auto">skateparky</Link>
+                    <Link to = "/spots-map?category=spots" className = "my-auto">street spoty</Link>
                     {/* <Link to = "/find-place" className = "my-auto">mapa</Link> */}
                     {/* <Link to = "/spots-map" className = "my-auto">mapa</Link> */}
-                    <Link to = "/map2" className = "my-auto">mapa</Link>
+                    <Link to = "/spots-map" className = "my-auto">mapa</Link>
 
                     {authorized ? 
                         <div className = {`${styles.account} `}>

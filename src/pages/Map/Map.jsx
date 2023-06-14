@@ -23,54 +23,51 @@ import userlocation from '../../assets/userlocation.png'
 
 const Map = (props) => {
     const {
-        spots, 
         selectedSkatepark, 
         setSelectedSkatepark, 
         filteredSkateparks,
-        categories, 
         setMobilePanelSwitch, 
     } = props
 
 
     const location = useLocation()
     const [loading, setLoading] = useState(true) 
-    const [infoWindowOpen, setInfoWindowOpen] = useState(false) // this is just for the clicking anywhere on map to not zoom, only close window on click anywhere else
 
 
     /**
      * set active/selected spot
      */
-    const itemRefs = useRef([])
+    // const itemRefs = useRef([])
 
     // onClick on skatepark
-    useEffect(() => {
-        if (selectedSkatepark?.lat && selectedSkatepark?.lng) {
-            panTo(selectedSkatepark?.lat, selectedSkatepark?.lng)
+    // useEffect(() => {
+    //     if (selectedSkatepark?.lat && selectedSkatepark?.lng) {
+    //         panTo(selectedSkatepark?.lat, selectedSkatepark?.lng)
 
-            // scrolls in list to selected skatepark
-            itemRefs?.current[filteredSkateparks.indexOf(selectedSkatepark)]?.scrollIntoView({
-                behavior: "smooth",
-                block: "center"
-            })
-        }
+    //         // scrolls in list to selected skatepark
+    //         itemRefs?.current[filteredSkateparks.indexOf(selectedSkatepark)]?.scrollIntoView({
+    //             behavior: "smooth",
+    //             block: "center"
+    //         })
+    //     }
 
-    }, [selectedSkatepark])
+    // }, [selectedSkatepark])
     
     // on load check params for active skatepark
-    const navigate = useNavigate()
-    useEffect(() => {
-        const queryParams = new URLSearchParams(location.search)
-        const param = queryParams.get('spot')
+    // const navigate = useNavigate()
+    // useEffect(() => {
+    //     const queryParams = new URLSearchParams(location.search)
+    //     const param = queryParams.get('spot')
 
-        if (param && filteredSkateparks.length > 0) {
-            const activeSkatepark = filteredSkateparks.find(skatepark => skatepark.uuid === param)
-            const activeIndex = filteredSkateparks.indexOf(activeSkatepark)
-            // navigate('/find-place', {replace: true, state: {activeIndex: activeIndex}}')
+    //     if (param && filteredSkateparks.length > 0) {
+    //         const activeSkatepark = filteredSkateparks.find(skatepark => skatepark.uuid === param)
+    //         const activeIndex = filteredSkateparks.indexOf(activeSkatepark)
+    //         // navigate('/find-place', {replace: true, state: {activeIndex: activeIndex}}')
             
-            navigate('/find-place')
-            setSelectedSkatepark(activeSkatepark)
-        }
-    }, [location, filteredSkateparks])
+    //         navigate('/find-place')
+    //         setSelectedSkatepark(activeSkatepark)
+    //     }
+    // }, [location, filteredSkateparks])
 
     const [userLocation, setUserLocation] = useState(null)
     const mapRef = useRef(null) 
@@ -81,6 +78,18 @@ const Map = (props) => {
             lat: 50.08949897498063,
             lng: 14.439616051195364, 
         }) 
+
+        mapRef.current?.setOptions({
+            // set one finger gesture for mobile
+            gestureHandling: 'greedy', 
+            // mapTypeId: 'satellite', 
+            clickableIcons: false, 
+            // center: userLocation ? {lat: userLocation.lat, lng: userLocation.lng} : {lat: 50.08949897498063, lng: 14.439616051195364}, 
+            // center: {lat: 50.08949897498063, lng: 14.439616051195364}, 
+            zoom: 13, 
+            minZoom: 8, 
+            // maxZoom: 18, 
+        })
 
         // set default location by user location
         navigator.geolocation.getCurrentPosition(
@@ -112,16 +121,23 @@ const Map = (props) => {
     }   
 
     /**
-     * copy coordinates to clipboard
+     * Zoom 
      */
-    const [copied, setCopied] = useState(false)
-    const copyValue = (lat, lng) => {
-        navigator.clipboard.writeText(`${lat}, ${lng}`) 
-        setCopied(true) 
-        setTimeout(() => {
-            setCopied(false)
-        }, 2000)
-    }
+    useEffect(() => {
+        console.log(selectedSkatepark)
+
+        if (selectedSkatepark === null) {
+            mapRef.current?.setOptions({
+                zoom: 12,
+            })
+        }
+        if (selectedSkatepark != null) {
+            mapRef.current?.setOptions({
+                zoom: 16,
+            })
+        }
+
+    }, [selectedSkatepark])
 
     const { isLoaded, loadError } = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY, 
@@ -142,20 +158,6 @@ const Map = (props) => {
                     mapContainerClassName = {styles.map} 
                     onLoad = {onMapLoad} 
                     onClick={() => setSelectedSkatepark(null)} 
-
-                    options = {{
-                        // set one finger gesture for mobile
-                        gestureHandling: 'greedy', 
-                        // mapTypeId: 'satellite', 
-                        clickableIcons: false, 
-                        // center: userLocation ? {lat: userLocation.lat, lng: userLocation.lng} : {lat: 50.08949897498063, lng: 14.439616051195364}, 
-                        // center: {lat: 50.08949897498063, lng: 14.439616051195364}, 
-                        zoom: 13, 
-                        minZoom: 8, 
-                        // maxZoom: 18, 
-                            
-
-                    }}
                 >
 
                     <div className = {`${styles.allSpots} mt-sm-5 pt-3 mx-3`}>
@@ -206,7 +208,7 @@ const Map = (props) => {
                     {selectedSkatepark && (
                         <InfoWindowF 
                             position = {{lat: selectedSkatepark.lat, lng: selectedSkatepark.lng}}
-                            onCloseClick={() => {setSelectedSkatepark(null); mapRef.current?.setZoom(13)}}  
+                            onCloseClick={() => setSelectedSkatepark(null)}  
                             // pixelOffset = {window.google.maps.Size(100, -3000)} 
                         >
                             <div className = {`${styles.infowindow}`}>
